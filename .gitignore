@@ -1,0 +1,8 @@
+/dist/
+*.apk
+*.idsig
+*.jks
+*.keystore
+.env*
+.secrets/
+__pycache__/
