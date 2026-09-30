@@ -5,7 +5,10 @@ Application source remains in `jerrywu-voltraware/gateway-commissioning-app`.
 
 ## Current status
 
-This repository is private. The existing Android `1.0.0+22` APK is retained as a
+This repository is public following the owner's decision on 2026-09-30. Field
+staff can open it and download published releases without a GitHub account.
+Builds 20, 21, and 22 currently remain drafts; making the repository public does
+not publish those drafts. The existing Android `1.0.0+22` APK is retained as a
 draft inventory baseline. It is not the update test target. The requested Android
 test starts at build 20 and upgrades to build 21, matching the iOS build currently
 in TestFlight review. Android build numbers are overridden per build; the shared
@@ -14,9 +17,11 @@ pubspec and iOS signing/build settings are not changed.
 No stable latest release is available until an operator explicitly publishes a
 reviewed draft and activates the corresponding backend delivery directory.
 
-The production APK includes a backend credential. Keep release access restricted
-until the distribution policy is approved. Never commit signing keys, credential
-files, build defines, or application source into this repository.
+The production APK includes a backend credential. Publishing an APK here makes
+its embedded contents available to anyone who downloads it. The owner has chosen
+public repository visibility; release publication remains a separate step. Never
+commit signing keys, credential files, build defines, or application source into
+this repository.
 
 ## Release contract
 
@@ -40,8 +45,9 @@ versionCode with the manifest version_code, then verifies the downloaded APK.
 APK size is limited to 150 MiB and notes to 20,000 UTF-16 units, matching both
 the backend and the Android client.
 
-Private assets require authorized GitHub access. Never embed a GitHub token in
-the mobile app. The chosen distribution path is a controlled backend: the release
+Draft assets require authorized GitHub access; published releases are public.
+Never embed a GitHub token in the mobile app. The in-app distribution path remains
+the authenticated backend: the release
 operator downloads and verifies GitHub assets, synchronizes the immutable release
 directory to the server, and activates its latest pointer. Mobile clients use
 their existing backend session. The server does not need a GitHub credential.
@@ -89,9 +95,10 @@ missing releases, and malformed metadata; verify package/signature/hash; and def
 installation during commissioning. Initial installation of an updater-enabled
 build remains necessary. Test upgrade in place and retained data on a real phone.
 
-## Stage the private release for backend delivery
+## Stage the release for backend delivery
 
-The operator's local GitHub CLI must be authenticated for this private repository.
+The release operator uses their authenticated local GitHub CLI; field staff do
+not need a GitHub account to access a published release in their browser.
 This validates package, version, production signer, hash and checksums again:
 
 ```powershell
@@ -110,4 +117,4 @@ The resulting directory contains `releases/<tag>/` and, only after activation,
 `latest.json`. Synchronize release files before atomically switching the server's
 latest.json. Keep credentials and mutable metadata out of GitHub download URLs.
 The authenticated API serves `/api/app/updates/android/latest` and a same-server
-APK route; the mobile app never needs direct private GitHub access.
+APK route; the mobile app never needs a GitHub account.

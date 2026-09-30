@@ -1,4 +1,4 @@
-"""Download a private GitHub release and verify a backend delivery directory."""
+"""Download a GitHub release and verify a backend delivery directory."""
 
 import argparse
 import json
