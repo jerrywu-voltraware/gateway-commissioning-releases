@@ -7,32 +7,39 @@ Application source remains in `jerrywu-voltraware/gateway-commissioning-app`.
 
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can open it and download published releases without a GitHub account.
-The current published and backend-enabled version is **Android 1.0.1 (Build 21)**:
+The current published and backend-enabled version is **Android 1.0.2 (Build 22)**:
 
-- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
-- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.1-b21/app_f431a39_b21_prod.apk)
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.2-b22)
+- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.2-b22/app_579ef50_b22_prod.apk)
+- Application source: `579ef50f58a4f3dbfc870d033c5209e709b921bf`.
 
-The corrected Build 20 baseline has passed download, signature verification,
-unknown-source permission handling and the Android installer prompt on Android 9.
-Final installation of Build 21 remains the user's acceptance step.
+Build 22 fixes misleading discovery badges on a phone without previous verified
+gateway history. The list shows pending verification and the backend presence for
+the advertised site/gateway identity. BLE identity checks still apply when
+connecting. A stable discovery-card key also preserves list state while the
+identify action inserts or removes its progress row at larger font sizes.
 
-The previously published [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
-is retained as an immutable historical record, including its original assets and
-URLs. **Do not install that original Build 21 for new use:** its Android 9 updater
-cannot read the downloaded APK's signing information correctly. The backend
-now points to the corrected 1.0.1 release; the original download URL is unchanged.
+Validation on 2026-09-30: 1,204 Flutter tests passed, analysis found no issues,
+and the signed production APK passed independent package/version/certificate
+checks including Android 9. In-place installation on the Samsung Android 9 phone
+preserved its first-install timestamp and interrupted-session record. Real BLE
+scanning showed both 81/1 and 81/2 as pending verification / backend online.
+This confirms the reported discovery-screen fix; it is not a full commissioning
+acceptance run or an in-app 21-to-22 download/install acceptance run.
 
-The correction preserves the requested **Android Build 20 -> Build 21** test and
-the iOS **Build 21** already in TestFlight review. The shared pubspec, iOS version,
-signing and build settings are unchanged. Android 9 must begin this test from the
-patched Build 20 baseline containing the archive-signature fix; the original
-updater-enabled Build 20 cannot complete this update by itself. Installing the
-same-package, same-signature patched Build 20 over Build 20 retains app data.
-Builds 20 and 22 remain draft test/inventory artifacts.
+The phone had successfully reached corrected Android 1.0.1 (Build 21) before this
+release. Build 22 retains that release's Android 9 update compatibility fix and
+increases versionCode from 21 to 22. The iOS native project and TestFlight build
+are unchanged by this release; Android 1.0.2/22 uses build-command overrides.
 
-A phone already on the original Build 21 will **not** be offered versionCode 21
-again merely because versionName changes to 1.0.1. Such phones need a later
-release with a higher versionCode; that rollout is outside this 20-to-21 test.
+The historical [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
+and [corrected Android 1.0.1 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
+retain their original assets and fixed URLs. New installations should use Build 22.
+The original 1.0.0 updater on Android 9 cannot inspect the downloaded APK signing
+information correctly; a manual same-package, same-signature APK installation is
+needed for affected devices. Patched Build 20 and corrected 1.0.1 Build 21 can use
+the authenticated update channel. Old 1.0.0 Build 20/22 inventory drafts remain
+separate from this published 1.0.2 Build 22 release.
 
 Future updates require an operator to publish a reviewed release and activate its
 verified backend delivery directory. Published release assets are immutable.
@@ -86,32 +93,29 @@ publish, or modify the application. Use an independently verified APK SHA-256.
 
 ```powershell
 $env:JAVA_HOME = 'C:\Program Files\Android\Android Studio\jbr'
-py -3 -X utf8 tools/prepare_release.py --apk <signed-prod-apk> --source-commit <full-commit> --expected-apk-sha256 <verified-sha256> --notes-file release-notes/android-v1.0.1-b21.md --android-build-tools <Android-Sdk-build-tools-directory>
+py -3 -X utf8 tools/prepare_release.py --apk <signed-prod-apk> --source-commit <full-commit> --expected-apk-sha256 <verified-sha256> --notes-file release-notes/android-v1.0.2-b22.md --android-build-tools <Android-Sdk-build-tools-directory>
 ```
 
 Use the appropriate release notes file for each new release. Review the generated
 manifest and verify the originating source and device acceptance evidence.
 
-For the requested Android test, run these from the clean application build
-checkout containing the Android 9 fix. Both use the same source and production
-signing key; these command-line overrides do not modify iOS or the shared pubspec:
+Build the current release from the clean application checkout with:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber 20
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber 21 -BuildName 1.0.1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber 22 -BuildName 1.0.2
 ```
 
 ## Upload a draft
 
 Run with the repository owner's GitHub CLI account. Explicitly list the three
-assets; do not upload a whole build directory. For the correction, verify the
+assets; do not upload a whole build directory. Verify the
 prepared manifest first and use its exact APK filename:
 
 ```powershell
-$releaseDir = 'dist/android-v1.0.1-b21'
+$releaseDir = 'dist/android-v1.0.2-b22'
 $manifest = Get-Content -LiteralPath "$releaseDir/android-update.json" -Encoding utf8 | ConvertFrom-Json
 $apkPath = Join-Path $releaseDir $manifest.apk.name
-gh release create android-v1.0.1-b21 --repo jerrywu-voltraware/gateway-commissioning-releases --draft --title 'Android 1.0.1 (Build 21)' --notes-file release-notes/android-v1.0.1-b21.md $apkPath "$releaseDir/android-update.json" "$releaseDir/SHA256SUMS"
+gh release create android-v1.0.2-b22 --repo jerrywu-voltraware/gateway-commissioning-releases --draft --title 'Android 1.0.2 (Build 22)' --notes-file release-notes/android-v1.0.2-b22.md $apkPath "$releaseDir/android-update.json" "$releaseDir/SHA256SUMS"
 ```
 
 Download the draft assets into a separate directory and verify SHA256SUMS before
@@ -132,7 +136,7 @@ not need a GitHub account to access a published release in their browser.
 This validates package, version, production signer, hash and checksums again:
 
 ```powershell
-py -3 -X utf8 tools/stage_release.py --tag android-v1.0.1-b21 --destination dist/backend-delivery --android-build-tools <Android-Sdk-build-tools-directory> --activate
+py -3 -X utf8 tools/stage_release.py --tag android-v1.0.2-b22 --destination dist/backend-delivery --android-build-tools <Android-Sdk-build-tools-directory> --activate
 ```
 
 For draft review only, replace `--activate` with `--allow-draft`. Drafts cannot
