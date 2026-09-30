@@ -13,6 +13,8 @@ import subprocess
 REPOSITORY = "jerrywu-voltraware/gateway-commissioning-releases"
 PACKAGE = "com.voltraware.gateway_commissioning"
 SIGNER = "2ae194573a906afd0a4e3ce347a275551e3e5b27a6d4a2644d36d07d102f4b64"
+MAX_APK_BYTES = 150 * 1024 * 1024
+MAX_NOTES_UNITS = 20000
 
 
 def sha256(path):
@@ -33,9 +35,11 @@ def run_verified(command):
 
 def prepare(args):
     apk = Path(args.apk).resolve(strict=True)
+    if not 0 < apk.stat().st_size <= MAX_APK_BYTES:
+        raise ValueError("APK size exceeds the mobile update limit")
     if not re.fullmatch(r"[0-9a-f]{40}", args.source_commit):
         raise ValueError("Provide a full lowercase source commit")
-    if apk.name != f"app_{args.source_commit[:7]}_prod.apk":
+    if not re.fullmatch(rf"app_{args.source_commit[:7]}(?:_b[1-9][0-9]*)?_prod\.apk", apk.name):
         raise ValueError("APK must have the clean production build-helper filename")
     if not re.fullmatch(r"[0-9a-fA-F]{64}", args.expected_apk_sha256):
         raise ValueError("Provide the independently verified APK SHA-256")
@@ -57,11 +61,14 @@ def prepare(args):
     if not match or match[1] != PACKAGE:
         raise ValueError("Unexpected APK package metadata")
     version_code, version_name = int(match[2]), match[3]
-    if version_code < 1 or not re.fullmatch(r"\d+\.\d+\.\d+", version_name):
+    if not 1 <= version_code <= 2100000000 or not re.fullmatch(r"\d+\.\d+\.\d+", version_name):
         raise ValueError("Unsupported release version")
+    override = re.fullmatch(r"app_[0-9a-f]{7}_b([0-9]+)_prod\.apk", apk.name)
+    if override and int(override[1]) != version_code:
+        raise ValueError("APK filename build number differs from its Android versionCode")
     notes = Path(args.notes_file).read_text(encoding="utf-8-sig").strip()
-    if not notes:
-        raise ValueError("Release notes are required")
+    if not notes or len(notes.encode("utf-16-le")) // 2 > MAX_NOTES_UNITS:
+        raise ValueError("Release notes must contain 1 to 20000 UTF-16 units")
     tag = f"android-v{version_name}-b{version_code}"
     output = Path(__file__).resolve().parents[1] / "dist" / tag
     if output.exists():
