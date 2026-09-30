@@ -7,15 +7,19 @@ Application source remains in `jerrywu-voltraware/gateway-commissioning-app`.
 
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can open it and download published releases without a GitHub account.
-Builds 20, 21, and 22 currently remain drafts; making the repository public does
-not publish those drafts. The existing Android `1.0.0+22` APK is retained as a
-draft inventory baseline. It is not the update test target. The requested Android
-test starts at build 20 and upgrades to build 21, matching the iOS build currently
-in TestFlight review. Android build numbers are overridden per build; the shared
-pubspec and iOS signing/build settings are not changed.
+The current published version is **Android 1.0.0 (Build 21)**:
 
-No stable latest release is available until an operator explicitly publishes a
-reviewed draft and activates the corresponding backend delivery directory.
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
+- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.0-b21/app_fc4bad3_b21_prod.apk)
+
+The backend update channel is active for Build 21. On an updater-enabled Build 20,
+use the app's menu to check for updates, download Build 21, and confirm Android's
+installation prompt. Builds 20 and 22 remain draft test/inventory artifacts.
+This aligns the Android test target with iOS Build 21 in TestFlight review;
+the shared pubspec and iOS signing/build settings were not changed.
+
+Future updates require an operator to publish a reviewed release and activate its
+verified backend delivery directory. Published release assets are immutable.
 
 The production APK includes a backend credential. Publishing an APK here makes
 its embedded contents available to anyone who downloads it. The owner has chosen
