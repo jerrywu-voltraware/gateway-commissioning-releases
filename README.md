@@ -3,6 +3,9 @@
 This repository stores release metadata and signed Android APK release assets.
 Application source remains in `jerrywu-voltraware/gateway-commissioning-app`.
 
+See [APP submission, release and update manual](docs/APP_RELEASE_MANUAL.md) for
+the fixed-version policy: keep **1.0.11** and increase **Build** for each update.
+
 ## Current status
 
 This repository is public following the owner's decision on 2026-09-30. Field
