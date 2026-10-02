@@ -10,8 +10,8 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can open it and download published releases without a GitHub account.
-The prepared release is **Android 1.0.11 (Build 39)**. Publication and backend
-activation are being verified before this section is marked current.
+The current release is **Android 1.0.11 (Build 39)**, published on 2026-10-02.
+The production in-app update channel is enabled for Build 39.
 
 - [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b39)
 - [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b39/app_d9e4adb_b39_prod.apk)
@@ -41,10 +41,15 @@ storage/kill-and-restore acceptance. No phone was installed or operated during
 this publication task. Complete or cancel an active commissioning or temporary
 PTU replacement before installing an update.
 
+The production signature and final APK metadata were independently verified.
+Anonymous GitHub downloads and authenticated production downloads matched the
+approved full-file hashes. The production latest endpoint returns Build 39;
+Build 32 assets and the existing backend services were verified unchanged.
+
 The historical [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
 and [corrected Android 1.0.1 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
 and [Android 1.0.2 (Build 22)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.2-b22)
-retain their original assets and fixed URLs. New installations should use Build 39 once the release is enabled.
+retain their original assets and fixed URLs. New installations should use Build 39.
 The original 1.0.0 updater on Android 9 cannot inspect the downloaded APK signing
 information correctly; a manual same-package, same-signature APK installation is
 needed for affected devices. Patched Build 20 and corrected 1.0.1 Build 21 can use
