@@ -10,42 +10,41 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can open it and download published releases without a GitHub account.
-The current release is **Android 1.0.11 (Build 32)**:
+The prepared release is **Android 1.0.11 (Build 39)**. Publication and backend
+activation are being verified before this section is marked current.
 
-- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b32)
-- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b32/app_0a29986_b32_prod.apk)
-- Application source: `0a299868a85799fafef3d04e8e1e47261bcd0673`.
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b39)
+- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b39/app_d9e4adb_b39_prod.apk)
+- Application source: `d9e4adbc7df9055b951ab22321b3fc2775ddbb5f`.
 
-The project version is now fixed in `pubspec.yaml` at `1.0.11+32`. Keep the
-release version at `1.0.11` and increase the build number for later updates unless
-the owner requests a version change. Android and future iOS builds inherit these
-defaults; this Android release does not rebuild or submit an iOS TestFlight build.
+The project version is fixed at **1.0.11**; `pubspec.yaml` is now `1.0.11+39`.
+Builds 33-38 were used for development and device testing, so the owner approved
+Build 39 to allow those installed test builds to receive a newer update.
+Future releases must increase Build without changing Version unless explicitly
+requested. A shared version change does not upload an iOS TestFlight build.
 
-Build 32 adds a persistent identify-duration setting under the existing
-connection-mode settings. The default is six seconds. Gateways advertising the
-new `a2_seconds` capability support 0-255 seconds; zero stops identification and
-does not grant a new physical-identification qualification. Older PTU-capable
-gateways accept 1-30 seconds, and earlier gateways keep their fixed six-second
-behavior. Unsupported values are reported explicitly. Publishing this APK does
-not deploy the accompanying gateway firmware. Identify feedback says the command
-was sent and still asks the operator to check the actual light.
+Build 39 includes the overnight BLE lifecycle and gateway-card improvements:
+selection, connection and commissioning are separate actions; connection cleanup
+is serialized; scan controls remain at the bottom; each card owns its
+commissioning action. Offline, unregistered and missing-bound-PTU states are
+explained more clearly. PTU replacement from the Wi-Fi repair flow now checks
+fresh identity and binding state, persists a recovery record before writing,
+and verifies read-back. Identify duration follows the current PTU contract:
+zero or 2-10 seconds, default four seconds.
 
-Build 32 retains the field commissioning improvements from Builds 23-31,
-including Wi-Fi recovery, the station-change restart screen, heartbeat and PTU
-discovery graphics, the installed version in the menu, and three-second upload
-checks that still require three distinct valid readings. It also retains the
-Android 9 update compatibility fix and Build 22 discovery safeguards.
-
-Validation on 2026-10-01: all 1,305 Flutter tests passed, analysis found no issues,
-and 121 independent focused tests passed, including cancellation, late replies,
-legacy firmware behavior, and persisted identify settings. These automated
-checks do not constitute a full BLE commissioning or physical 0-255 second light
-acceptance run. This release task does not install Build 32 on the user's phone.
+Validation on 2026-10-02: all 1,472 Flutter tests passed, analysis found no issues,
+and 74 independent focused tests passed. The final source adds only the Build
+metadata to the tested source. Earlier Builds 33-36 had bounded device acceptance;
+Android 133 retries still occurred. The latest PTU-replacement recovery has
+controller and cross-process mock evidence, not physical replacement or Android
+storage/kill-and-restore acceptance. No phone was installed or operated during
+this publication task. Complete or cancel an active commissioning or temporary
+PTU replacement before installing an update.
 
 The historical [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
 and [corrected Android 1.0.1 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
 and [Android 1.0.2 (Build 22)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.2-b22)
-retain their original assets and fixed URLs. New installations should use Build 32.
+retain their original assets and fixed URLs. New installations should use Build 39 once the release is enabled.
 The original 1.0.0 updater on Android 9 cannot inspect the downloaded APK signing
 information correctly; a manual same-package, same-signature APK installation is
 needed for affected devices. Patched Build 20 and corrected 1.0.1 Build 21 can use
@@ -104,7 +103,7 @@ publish, or modify the application. Use an independently verified APK SHA-256.
 
 ```powershell
 $env:JAVA_HOME = 'C:\Program Files\Android\Android Studio\jbr'
-py -3 -X utf8 tools/prepare_release.py --apk <signed-prod-apk> --source-commit <full-commit> --expected-apk-sha256 <verified-sha256> --notes-file release-notes/android-v1.0.11-b32.md --android-build-tools <Android-Sdk-build-tools-directory>
+py -3 -X utf8 tools/prepare_release.py --apk <signed-prod-apk> --source-commit <full-commit> --expected-apk-sha256 <verified-sha256> --notes-file release-notes/android-v1.0.11-b39.md --android-build-tools <Android-Sdk-build-tools-directory>
 ```
 
 Use the appropriate release notes file for each new release. Review the generated
@@ -113,7 +112,7 @@ manifest and verify the originating source and device acceptance evidence.
 Build the current release from the clean application checkout with:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber 32 -BuildName 1.0.11
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber 39 -BuildName 1.0.11
 ```
 
 ## Upload a draft
@@ -123,10 +122,10 @@ assets; do not upload a whole build directory. Verify the
 prepared manifest first and use its exact APK filename:
 
 ```powershell
-$releaseDir = 'dist/android-v1.0.11-b32'
+$releaseDir = 'dist/android-v1.0.11-b39'
 $manifest = Get-Content -LiteralPath "$releaseDir/android-update.json" -Encoding utf8 | ConvertFrom-Json
 $apkPath = Join-Path $releaseDir $manifest.apk.name
-gh release create android-v1.0.11-b32 --repo jerrywu-voltraware/gateway-commissioning-releases --draft --title 'Android 1.0.11 (Build 32)' --notes-file release-notes/android-v1.0.11-b32.md $apkPath "$releaseDir/android-update.json" "$releaseDir/SHA256SUMS"
+gh release create android-v1.0.11-b39 --repo jerrywu-voltraware/gateway-commissioning-releases --draft --title 'Android 1.0.11 (Build 39)' --notes-file release-notes/android-v1.0.11-b39.md $apkPath "$releaseDir/android-update.json" "$releaseDir/SHA256SUMS"
 ```
 
 Download the draft assets into a separate directory and verify SHA256SUMS before
@@ -147,7 +146,7 @@ not need a GitHub account to access a published release in their browser.
 This validates package, version, production signer, hash and checksums again:
 
 ```powershell
-py -3 -X utf8 tools/stage_release.py --tag android-v1.0.11-b32 --destination dist/backend-delivery --android-build-tools <Android-Sdk-build-tools-directory> --activate
+py -3 -X utf8 tools/stage_release.py --tag android-v1.0.11-b39 --destination dist/backend-delivery --android-build-tools <Android-Sdk-build-tools-directory> --activate
 ```
 
 For draft review only, replace `--activate` with `--allow-draft`. Drafts cannot

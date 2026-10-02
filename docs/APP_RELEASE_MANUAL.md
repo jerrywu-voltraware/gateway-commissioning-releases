@@ -6,15 +6,15 @@
 
 **依使用者決定，APP 版本號固定為 `1.0.11`，後續一般修正與更新不再增加版本號，只增加 Build。** 不得自行改成 `1.0.12`、`1.1.0`，也不得讓自動發布工具按照每次修正自動增加版本號。只有使用者明確改變這項決定時，才另行規劃版本變更。
 
-本次基準是 **`1.0.11 (Build 32)`**，`APP_v2/pubspec.yaml` 為：
+本次基準是 **`1.0.11 (Build 39)`**，`APP_v2/pubspec.yaml` 為：
 
 ```yaml
-version: 1.0.11+32
+version: 1.0.11+39
 ```
 
-若兩平台都沒有占用更高的 Build，下一次只改為 `1.0.11+33`，再下一次為 `1.0.11+34`。發布前必須查詢 Android 已發布／已交付安裝的 Build，以及 App Store Connect 已上傳的 Build，確認本次數字尚未使用。**不可回退、重用已交付的 Build，或覆寫已公開的 Release 資產。** 既有早期 Build 21 修正例外不得當成日後重用 Build 的依據。
+若兩平台都沒有占用更高的 Build，下一次只改為 `1.0.11+40`，再下一次為 `1.0.11+41`。發布前必須查詢 Android 已發布／已交付安裝的 Build，以及 App Store Connect 已上傳的 Build，確認本次數字尚未使用。**不可回退、重用已交付的 Build，或覆寫已公開的 Release 資產。** 既有早期 Build 21 修正例外不得當成日後重用 Build 的依據。
 
-**同一核定來源、同一批次的 Android 與 iOS 可以共用相同 Build。** 例如 Android Build 32 已交付，仍可依同批核定來源製作 iOS Build 32；禁止的是同一平台重用該 Build 發布不同內容，不是禁止跨平台對齊。
+**同一核定來源、同一批次的 Android 與 iOS 可以共用相同 Build。** 例如 Android Build 39 已交付，仍可依同批核定來源製作 iOS Build 39；禁止的是同一平台重用該 Build 發布不同內容，不是禁止跨平台對齊。
 
 | 用途 | 固定版本欄位 | 每次遞增欄位 |
 |---|---|---|
@@ -39,14 +39,14 @@ Android 發布庫維持 **public**，現場人員下載已公開 APK 不需要 G
 
 ## 3. 修改 Build、測試、提交 APP
 
-以下指令從同一個 PowerShell 工作階段依序執行。**`33` 只是 Build 32 後的下一版範例，不是永久預設值**；先依第 1 節核定實際 Build，再設定變數。範例不會修改目前 Build 32。
+以下指令從同一個 PowerShell 工作階段依序執行。**`40` 只是 Build 39 後的下一版範例，不是永久預設值**；先依第 1 節核定實際 Build，再設定變數。範例不會修改目前 Build 39。
 
 ```powershell
 $workspace = 'F:\iot_gateway'
 $appRoot = Join-Path $workspace 'APP_v2'
 $releaseRoot = Join-Path $workspace 'android_releases'
 $releaseVersion = '1.0.11'
-$releaseBuild = 33
+$releaseBuild = 40
 $releaseTag = "android-v$releaseVersion-b$releaseBuild"
 $releaseRepo = 'jerrywu-voltraware/gateway-commissioning-releases'
 Set-Location -LiteralPath $appRoot
@@ -75,7 +75,7 @@ git diff --cached --stat
 git diff --cached
 ```
 
-確認暫存範圍完整後提交。Commit message 使用英文，例如 `Release Android 1.0.11 build 33`。接著確認工作樹乾淨並記錄完整 commit；不可為正式發布使用 `-AllowDirty`。
+確認暫存範圍完整後提交。Commit message 使用英文，例如 `Release Android 1.0.11 build 40`。接著確認工作樹乾淨並記錄完整 commit；不可為正式發布使用 `-AllowDirty`。
 
 ```powershell
 git commit -m "Release Android $releaseVersion build $releaseBuild"
@@ -231,7 +231,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Local backend delivery verification failed' }
 
 正式站資產根目錄為 `/home/jerrywu/android-app-releases`；不可變目錄為 `releases/<tag>/`。既有後台以 readonly mount 讀取它，提供驗證過的 `/api/app/updates/android/latest` 與 `/api/app/updates/android/<tag>/apk`。單純 APP 發布不需要重建或重啟後台容器。
 
-本次使用工作區 `tools/deployment/android_build32_rollout.py`，**固定只做 `1.0.11 Build 31 → 32`**，並固定來源 `0a299868a85799fafef3d04e8e1e47261bcd0673`。它不是通用下一版發布器；**下次 Build 33 不可照抄 Build 32 的 helper、run-id、tag、source 或 hash，也不可修改舊 helper 來冒充新的核定流程。**
+本次使用工作區 `tools/deployment/android_build39_rollout.py`，**固定只做 `1.0.11 Build 32 → 39`**，並固定來源 `d9e4adbc7df9055b951ab22321b3fc2775ddbb5f`。它不是通用下一版發布器；**下次 Build 40 不可照抄 Build 39 的 helper、run-id、tag、source 或 hash，也不可修改舊 helper 來冒充新的核定流程。**
 
 每次正式更新依序執行：
 
@@ -243,14 +243,14 @@ if ($LASTEXITCODE -ne 0) { throw 'Local backend delivery verification failed' }
 6. 正式回讀確認最新版本／Build／source／APK route；以既有後台登入憑證完整下載新 APK，核對 bytes／SHA 及 `no-store`、`nosniff`，再核對舊 APK 固定 URL 與 hash 未變。未認證的 latest／APK 應為 401。驗證保留 HTTPS CA 與主機名稱檢查，不用關閉 TLS 驗證來求通過。
 7. 與操作前基準比較容器／後台／mount 未變，獨立匿名確認 GitHub latest 與完整三資產下載。只宣告實際通過的項目。
 
-Build 32 工具的參數介面如下，**僅供辨識，這是含 placeholder 的說明，不是可直接執行的命令**：
+Build 39 工具的參數介面如下，**僅供辨識，這是含 placeholder 的說明，不是可直接執行的命令**：
 
 ```text
-py -3 -X utf8 tools/deployment/android_build32_rollout.py <stage|activate|rollback>
+py -3 -X utf8 tools/deployment/android_build39_rollout.py <stage|activate|rollback>
   --run-id <本次唯一UTC run-id>
-  --assets <已核定Build32三資產目錄>
-  --source-commit <固定Build32完整來源commit>
-  --apk-name <固定Build32檔名>
+  --assets <已核定Build39三資產目錄>
+  --source-commit <固定Build39完整來源commit>
+  --apk-name <固定Build39檔名>
   --apk-sha256 <已驗APK SHA-256>
   --manifest-sha256 <已驗manifest SHA-256>
   --checksums-sha256 <已驗SHA256SUMS SHA-256>
