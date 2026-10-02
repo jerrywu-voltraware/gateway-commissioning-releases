@@ -6,13 +6,17 @@
 
 **依使用者決定，APP 版本號固定為 `1.0.11`，後續一般修正與更新不再增加版本號，只增加 Build。** 不得自行改成 `1.0.12`、`1.1.0`，也不得讓自動發布工具按照每次修正自動增加版本號。只有使用者明確改變這項決定時，才另行規劃版本變更。
 
-本次基準是 **`1.0.11 (Build 39)`**，`APP_v2/pubspec.yaml` 為：
+目前已發布基準是 **`1.0.11 (Build 40)`**（2026-10-03 更新：原為 Build 39）。這次核定來源位於 `APP_badge_alignment` Git worktree，commit `167dfc7acaca18ca23781e2c47abf5ea9a67f968`，該工作樹的 `pubspec.yaml` 為：
 
 ```yaml
-version: 1.0.11+39
+version: 1.0.11+40
 ```
 
-若兩平台都沒有占用更高的 Build，下一次只改為 `1.0.11+40`，再下一次為 `1.0.11+41`。發布前必須查詢 Android 已發布／已交付安裝的 Build，以及 App Store Connect 已上傳的 Build，確認本次數字尚未使用。**不可回退、重用已交付的 Build，或覆寫已公開的 Release 資產。** 既有早期 Build 21 修正例外不得當成日後重用 Build 的依據。
+`APP_v2` 仍保留其他 Wi-Fi／資料頁開發，未合併此次獨立發布分支；後續發布前應整合已發布的標籤修正，不能只依主工作目錄的舊 Build 判定最新版本。
+
+**2026-10-03 內容範圍更正：使用者確認 Android 應包含最後 iOS 已改好的「使用手機目前 Wi-Fi」流程。已發布 Build 40 未納入 `f2f4ea0` 這批共同修改，產物／下載核對通過不能代替內容一致性驗收。已交助手從最新共同來源準備修正版候選；尚未發布新的 Build，既有 40 資產保持不可覆寫。**
+
+若兩平台都沒有占用更高的 Build，下一次只改為 `1.0.11+41`，再下一次為 `1.0.11+42`。發布前必須查詢 Android 已發布／已交付安裝的 Build，以及 App Store Connect 已上傳的 Build，確認本次數字尚未使用。**不可回退、重用已交付的 Build，或覆寫已公開的 Release 資產。** 既有早期 Build 21 修正例外不得當成日後重用 Build 的依據。
 
 **同一核定來源、同一批次的 Android 與 iOS 可以共用相同 Build。** 例如 Android Build 39 已交付，仍可依同批核定來源製作 iOS Build 39；禁止的是同一平台重用該 Build 發布不同內容，不是禁止跨平台對齊。
 
@@ -39,14 +43,14 @@ Android 發布庫維持 **public**，現場人員下載已公開 APK 不需要 G
 
 ## 3. 修改 Build、測試、提交 APP
 
-以下指令從同一個 PowerShell 工作階段依序執行。**`40` 只是 Build 39 後的下一版範例，不是永久預設值**；先依第 1 節核定實際 Build，再設定變數。範例不會修改目前 Build 39。
+以下指令從同一個 PowerShell 工作階段依序執行。**`41` 只是 Build 40 後的下一版範例，不是永久預設值**；先依第 1 節核定實際 Build 與來源工作樹，再設定變數。範例不會修改目前已發布的 Build 40。
 
 ```powershell
 $workspace = 'F:\iot_gateway'
 $appRoot = Join-Path $workspace 'APP_v2'
 $releaseRoot = Join-Path $workspace 'android_releases'
 $releaseVersion = '1.0.11'
-$releaseBuild = 40
+$releaseBuild = 41
 $releaseTag = "android-v$releaseVersion-b$releaseBuild"
 $releaseRepo = 'jerrywu-voltraware/gateway-commissioning-releases'
 Set-Location -LiteralPath $appRoot
@@ -75,7 +79,7 @@ git diff --cached --stat
 git diff --cached
 ```
 
-確認暫存範圍完整後提交。Commit message 使用英文，例如 `Release Android 1.0.11 build 40`。接著確認工作樹乾淨並記錄完整 commit；不可為正式發布使用 `-AllowDirty`。
+確認暫存範圍完整後提交。Commit message 使用英文，例如 `Release Android 1.0.11 build 41`。接著確認工作樹乾淨並記錄完整 commit；不可為正式發布使用 `-AllowDirty`。
 
 ```powershell
 git commit -m "Release Android $releaseVersion build $releaseBuild"
@@ -231,7 +235,9 @@ if ($LASTEXITCODE -ne 0) { throw 'Local backend delivery verification failed' }
 
 正式站資產根目錄為 `/home/jerrywu/android-app-releases`；不可變目錄為 `releases/<tag>/`。既有後台以 readonly mount 讀取它，提供驗證過的 `/api/app/updates/android/latest` 與 `/api/app/updates/android/<tag>/apk`。單純 APP 發布不需要重建或重啟後台容器。
 
-本次使用工作區 `tools/deployment/android_build39_rollout.py`，**固定只做 `1.0.11 Build 32 → 39`**，並固定來源 `d9e4adbc7df9055b951ab22321b3fc2775ddbb5f`。它不是通用下一版發布器；**下次 Build 40 不可照抄 Build 39 的 helper、run-id、tag、source 或 hash，也不可修改舊 helper 來冒充新的核定流程。**
+本次使用工作區 `tools/deployment/android_build40_rollout.py`，**固定只做 `1.0.11 Build 39 → 40`**，並固定來源 `167dfc7acaca18ca23781e2c47abf5ea9a67f968`（2026-10-03 更新：原為 Build 39 專用 helper）。它不是通用下一版發布器；**下次 Build 41 不可照抄 Build 40 的 helper、run-id、tag、source 或 hash，也不可修改舊 helper 來冒充新的核定流程。**
+
+Build 40 的正式啟用使用已獨立審查的 `activate_build40_verified.py`：先完整匿名下載，再重查公開 stable/latest 及資產身分、重新計算三資產 hash，最後呼叫相同 rollout 的遠端原子切換。它固定核定 pins、helper hash 與 run-id，只適用此次 Build 40。
 
 每次正式更新依序執行：
 
@@ -243,14 +249,14 @@ if ($LASTEXITCODE -ne 0) { throw 'Local backend delivery verification failed' }
 6. 正式回讀確認最新版本／Build／source／APK route；以既有後台登入憑證完整下載新 APK，核對 bytes／SHA 及 `no-store`、`nosniff`，再核對舊 APK 固定 URL 與 hash 未變。未認證的 latest／APK 應為 401。驗證保留 HTTPS CA 與主機名稱檢查，不用關閉 TLS 驗證來求通過。
 7. 與操作前基準比較容器／後台／mount 未變，獨立匿名確認 GitHub latest 與完整三資產下載。只宣告實際通過的項目。
 
-Build 39 工具的參數介面如下，**僅供辨識，這是含 placeholder 的說明，不是可直接執行的命令**：
+Build 40 工具的參數介面如下，**僅供辨識，這是含 placeholder 的說明，不是可直接執行的命令**：
 
 ```text
-py -3 -X utf8 tools/deployment/android_build39_rollout.py <stage|activate|rollback>
+py -3 -X utf8 tools/deployment/android_build40_rollout.py <stage|activate|rollback>
   --run-id <本次唯一UTC run-id>
-  --assets <已核定Build39三資產目錄>
-  --source-commit <固定Build39完整來源commit>
-  --apk-name <固定Build39檔名>
+  --assets <已核定Build40三資產目錄>
+  --source-commit <固定Build40完整來源commit>
+  --apk-name <固定Build40檔名>
   --apk-sha256 <已驗APK SHA-256>
   --manifest-sha256 <已驗manifest SHA-256>
   --checksums-sha256 <已驗SHA256SUMS SHA-256>

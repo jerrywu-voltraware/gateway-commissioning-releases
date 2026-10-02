@@ -9,47 +9,43 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 ## Current status
 
 This repository is public following the owner's decision on 2026-09-30. Field
-staff can open it and download published releases without a GitHub account.
-The current release is **Android 1.0.11 (Build 39)**, published on 2026-10-02.
-The production in-app update channel is enabled for Build 39.
+staff can download published releases without a GitHub account.
+The current release is **Android 1.0.11 (Build 40)**, published on 2026-10-03.
+The production in-app update channel is enabled for Build 40.
 
-- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b39)
-- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b39/app_d9e4adb_b39_prod.apk)
-- Application source: `d9e4adbc7df9055b951ab22321b3fc2775ddbb5f`.
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b40)
+- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b40/app_167dfc7_b40_prod.apk)
+- Application source: `167dfc7acaca18ca23781e2c47abf5ea9a67f968`.
 
-The project version is fixed at **1.0.11**; `pubspec.yaml` is now `1.0.11+39`.
-Builds 33-38 were used for development and device testing, so the owner approved
-Build 39 to allow those installed test builds to receive a newer update.
-Future releases must increase Build without changing Version unless explicitly
-requested. A shared version change does not upload an iOS TestFlight build.
+The project version remains **1.0.11**; the approved source uses `1.0.11+40`.
+Build 40 aligns the gateway connection badge with the configuration and backend
+status chips, retaining a separate MAC row and wrapping on narrow screens or
+larger text sizes. BLE behavior is unchanged from Build 39.
 
-Build 39 includes the overnight BLE lifecycle and gateway-card improvements:
-selection, connection and commissioning are separate actions; connection cleanup
-is serialized; scan controls remain at the bottom; each card owns its
-commissioning action. Offline, unregistered and missing-bound-PTU states are
-explained more clearly. PTU replacement from the Wi-Fi repair flow now checks
-fresh identity and binding state, persists a recovery record before writing,
-and verifies read-back. Identify duration follows the current PTU contract:
-zero or 2-10 seconds, default four seconds.
+Known scope gap reported on 2026-10-03: Build 40 was prepared from the Build 39
+source and does not include the later shared iOS/Android changes in `f2f4ea0`,
+including the phone's current Wi-Fi form and compact commissioning/data pages.
+A corrected Android candidate is being prepared from that newer source. It is
+not yet published; the immutable Build 40 assets will not be replaced.
 
-Validation on 2026-10-02: all 1,472 Flutter tests passed, analysis found no issues,
-and 74 independent focused tests passed. The final source adds only the Build
-metadata to the tested source. Earlier Builds 33-36 had bounded device acceptance;
-Android 133 retries still occurred. The latest PTU-replacement recovery has
-controller and cross-process mock evidence, not physical replacement or Android
-storage/kill-and-restore acceptance. No phone was installed or operated during
-this publication task. Complete or cancel an active commissioning or temporary
-PTU replacement before installing an update.
+All 1,473 Flutter tests passed and analysis found no issues. The production
+signer, Android 9 compatibility, 16K alignment and complete APK hash were
+independently verified. The same APK was installed over Build 39 on the test
+phone and launched successfully. This release does not claim a new physical
+BLE/PTU commissioning acceptance test or an Android 133 fix.
 
-The production signature and final APK metadata were independently verified.
-Anonymous GitHub downloads and authenticated production downloads matched the
-approved full-file hashes. The production latest endpoint returns Build 39;
-Build 32 assets and the existing backend services were verified unchanged.
+Three release assets were downloaded and verified before publication. Anonymous
+GitHub downloads and authenticated production HTTPS downloads from the VPS
+matched the approved hashes. A Windows production full-download probe exceeded
+its deadline and is not counted as passed; production health, metadata and small
+reads worked. Build 39 assets remain unchanged. No iOS archive or upload was performed.
+Complete or cancel an active commissioning or temporary PTU replacement before
+installing an update.
 
 The historical [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
 and [corrected Android 1.0.1 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
 and [Android 1.0.2 (Build 22)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.2-b22)
-retain their original assets and fixed URLs. New installations should use Build 39.
+retain their original assets and fixed URLs. New installations should use Build 40.
 The original 1.0.0 updater on Android 9 cannot inspect the downloaded APK signing
 information correctly; a manual same-package, same-signature APK installation is
 needed for affected devices. Patched Build 20 and corrected 1.0.1 Build 21 can use
@@ -107,8 +103,8 @@ signer, then writes assets into ignored `dist/<tag>/`. It does not build, instal
 publish, or modify the application. Use an independently verified APK SHA-256.
 
 ```powershell
-$env:JAVA_HOME = 'C:\Program Files\Android\Android Studio\jbr'
-py -3 -X utf8 tools/prepare_release.py --apk <signed-prod-apk> --source-commit <full-commit> --expected-apk-sha256 <verified-sha256> --notes-file release-notes/android-v1.0.11-b39.md --android-build-tools <Android-Sdk-build-tools-directory>
+$env:JAVA_HOME = 'C:\Program Files\Android\Android Studio1\jbr'
+py -3 -X utf8 tools/prepare_release.py --apk <signed-prod-apk> --source-commit <full-commit> --expected-apk-sha256 <verified-sha256> --notes-file release-notes/android-v1.0.11-b40.md --android-build-tools <Android-Sdk-build-tools-directory>
 ```
 
 Use the appropriate release notes file for each new release. Review the generated
@@ -117,7 +113,7 @@ manifest and verify the originating source and device acceptance evidence.
 Build the current release from the clean application checkout with:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber 39 -BuildName 1.0.11
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber 40 -BuildName 1.0.11
 ```
 
 ## Upload a draft
@@ -127,10 +123,10 @@ assets; do not upload a whole build directory. Verify the
 prepared manifest first and use its exact APK filename:
 
 ```powershell
-$releaseDir = 'dist/android-v1.0.11-b39'
+$releaseDir = 'dist/android-v1.0.11-b40'
 $manifest = Get-Content -LiteralPath "$releaseDir/android-update.json" -Encoding utf8 | ConvertFrom-Json
 $apkPath = Join-Path $releaseDir $manifest.apk.name
-gh release create android-v1.0.11-b39 --repo jerrywu-voltraware/gateway-commissioning-releases --draft --title 'Android 1.0.11 (Build 39)' --notes-file release-notes/android-v1.0.11-b39.md $apkPath "$releaseDir/android-update.json" "$releaseDir/SHA256SUMS"
+gh release create android-v1.0.11-b40 --repo jerrywu-voltraware/gateway-commissioning-releases --draft --title 'Android 1.0.11 (Build 40)' --notes-file release-notes/android-v1.0.11-b40.md $apkPath "$releaseDir/android-update.json" "$releaseDir/SHA256SUMS"
 ```
 
 Download the draft assets into a separate directory and verify SHA256SUMS before
@@ -151,7 +147,7 @@ not need a GitHub account to access a published release in their browser.
 This validates package, version, production signer, hash and checksums again:
 
 ```powershell
-py -3 -X utf8 tools/stage_release.py --tag android-v1.0.11-b39 --destination dist/backend-delivery --android-build-tools <Android-Sdk-build-tools-directory> --activate
+py -3 -X utf8 tools/stage_release.py --tag android-v1.0.11-b40 --destination dist/backend-delivery --android-build-tools <Android-Sdk-build-tools-directory> --activate
 ```
 
 For draft review only, replace `--activate` with `--allow-draft`. Drafts cannot
