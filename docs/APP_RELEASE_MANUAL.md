@@ -239,6 +239,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Local backend delivery verification failed' }
 
 2026-10-03 的 Build 50 使用工作區 `tools/deployment/android_build50_rollout.py`、`activate_build50_verified.py` 與 `verify_android50_public_channel.py`，只適用 42→50；唯一 run-id 為 `20261003T124729Z`，實際 source 為 c8e4ea1，完整 pins 與完成證據見工作區 `CONTINUE_2026-10-03_BUILD50_PUBLICATION.md`。公開資產不可覆寫；這些工具不可直接套用下一版。
 
+2026-10-03 的 **Build 51 已發布並啟用正式通道**，本輪固定 50→51。使用工作區 `tools/deployment/android_build51_rollout.py`、`activate_build51_verified.py`、`verify_android51_public_channel.py`；唯一 run-id `20261003T153839Z`，來源 `3b320c7c60c1f772a709bd7c19cd7fe7eb719832`，共享 pubspec 為 `1.0.11+51`。三資產 pins 在工作區 `docs/test_results/android_build51_rollout_pins.json`；回復資料在 VPS `/home/jerrywu/android-app-releases/.rollout-1.0.11-b51-20261003T153839Z`。草稿、公開匿名完整下載與正式 HTTPS 新51／舊50 APK驗證均通過，正式服務保持本輪基準不變；完整紀錄見 `CONTINUE_2026-10-03_BUILD51_PUBLICATION.md`。使用者自行從 APP 更新，這輪沒有 ADB 安裝或手機內升級驗收。上述工具與公開資產皆固定於 Build 51，不可改寫冒充下一版。
+
 以下保留 Build 42 的歷史工具說明：`tools/deployment/android_build42_rollout.py` **固定只做 `1.0.11 Build 41 → 42`**，來源 `b997b7b8e0dcba3169f9f78c732ed42746cc3ad1`。它不是通用下一版發布器；後續版本不可照抄舊 helper 的 run-id、tag、source 或 hash，也不可修改舊 helper 來冒充新的核定流程。
 
 Build 42 的正式啟用使用已獨立審查的 `activate_build42_verified.py`：先完整匿名下載，再重查公開 stable/latest 及資產身分、重新計算三資產 hash，最後呼叫相同 rollout 的遠端原子切換。它固定核定 pins、helper hash 與 run-id，只適用此次 Build 42。

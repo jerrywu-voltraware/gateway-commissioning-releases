@@ -10,40 +10,40 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can download published releases without a GitHub account.
-The current release is **GIOS 設備助手 — Android 1.0.11 (Build 50)**, published on 2026-10-03.
-The production in-app update channel is enabled for Build 50.
+The current release is **GIOS 設備助手 — Android 1.0.11 (Build 51)**, published on 2026-10-03.
+The production in-app update channel is enabled for Build 51.
 
-- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b50)
-- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b50/app_c8e4ea1_b50_prod.apk)
-- Application source: `c8e4ea10c54f5b3e3a1bf344d36e5900a7d2e3a9`, fixed by the source repository's `android-v1.0.11-b50` tag.
-- APK SHA-256: `b700bb8b40d8f06825fb3e678b4535d3d2fd21069de5df11804c3e8d6b8f2375`.
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b51)
+- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b51/app_3b320c7_b51_prod.apk)
+- Application source: `3b320c7c60c1f772a709bd7c19cd7fe7eb719832`, fixed by the source repository's `android-v1.0.11-b51` tag.
+- APK SHA-256: `b77f129ce6b2207037998ba85bbccf6fc1b5ed36adcd980a8b1abd59491c6136`.
 
-The project version remains **1.0.11**. Build 50 unifies the launcher and app
-header as **GIOS 設備助手**, adds softly pulsing gold next-action captions,
-presents both station choices clearly, and shows neutral upload progress after
-Wi-Fi reset. It retains the current-phone Wi-Fi flow, remembered passwords and
-password visibility toggle from Build 42.
+Build 51 keeps rejected verification samples collapsed by default and labels the
+remaining countdown clearly, without changing acceptance criteria. The help sheet
+can show backend guidance and accept an explicit field response. Reports identify
+the installed app version and distinguish idle waiting from an operation in progress.
+An older backend falls back to telephone guidance without repeatedly polling an
+unsupported reply endpoint. Existing Wi-Fi setup, remembered passwords, gold
+next-action hints and the GIOS 設備助手 display name are retained.
 
-This release uses the exact production-signed APK already installed on the field
-phone. It was built from the tagged source with `-BuildNumber 50`; that source's
-pubspec still says `1.0.11+42`. Main's shared default was subsequently aligned to
-`1.0.11+50` in `54943b3`, without rebuilding or replacing the approved APK.
+This production-signed APK was built from the tagged shared main source, whose
+pubspec is `1.0.11+51`. Version, package, signer and all three asset hashes passed
+independent review. Focused app checks and offline publication guard checks passed.
+Full draft and anonymous public GitHub downloads matched the approved files.
+Authenticated production HTTPS downloads from the VPS matched both new Build 51
+and old Build 50 hashes, using the public address, trusted CA and hostname checks.
+The old assets and running services remained unchanged by this publication.
 
-Version, production signer and full asset hashes were verified. Draft and public
-anonymous GitHub downloads matched the approved files. Authenticated production
-HTTPS downloads from the VPS matched both new Build 50 and old Build 42 hashes,
-using the public address, trusted CA and hostname validation. Old Build 42 assets
-and running services remained unchanged. Per the user's request, no functional
-tests were run for Builds 43–50; these release checks do not establish device
-workflow acceptance or a phone-driven in-app upgrade. No iOS archive or upload
-was performed; its display name was updated in source only.
+The user will install using the app's Check for updates menu. No ADB installation,
+phone-driven upgrade, real BLE/PTU workflow or two-way rescue conversation was
+performed during publication. No iOS archive/upload or backend deployment was made.
 Complete or cancel an active commissioning or temporary PTU replacement before
 installing an update.
 
 The historical [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
 and [corrected Android 1.0.1 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
 and [Android 1.0.2 (Build 22)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.2-b22)
-retain their original assets and fixed URLs. New installations should use Build 50.
+retain their original assets and fixed URLs. New installations should use Build 51.
 The original 1.0.0 updater on Android 9 cannot inspect the downloaded APK signing
 information correctly; a manual same-package, same-signature APK installation is
 needed for affected devices. Patched Build 20 and corrected 1.0.1 Build 21 can use
@@ -109,7 +109,7 @@ Use the appropriate release notes file for each new release. Review the generate
 manifest and verify the originating source and device acceptance evidence.
 
 For a new release, use the approved, unused Build number and a clean checkout.
-Do not rebuild or replace the published Build 50 assets:
+Do not rebuild or replace the published Build 51 or earlier assets:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber <approved-build-number> -BuildName 1.0.11
