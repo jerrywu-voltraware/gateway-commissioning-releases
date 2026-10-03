@@ -1,4 +1,4 @@
-# Gateway Commissioning Android Releases
+# GIOS Device Assistant Android Releases
 
 This repository stores release metadata and signed Android APK release assets.
 Application source remains in `jerrywu-voltraware/gateway-commissioning-app`.
@@ -10,45 +10,40 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can download published releases without a GitHub account.
-The current release is **Android 1.0.11 (Build 42)**, published on 2026-10-03.
-The production in-app update channel is enabled for Build 42.
+The current release is **GIOS 設備助手 — Android 1.0.11 (Build 50)**, published on 2026-10-03.
+The production in-app update channel is enabled for Build 50.
 
-- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b42)
-- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b42/app_b997b7b_b42_prod.apk)
-- Application source: `b997b7b8e0dcba3169f9f78c732ed42746cc3ad1`.
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b50)
+- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b50/app_c8e4ea1_b50_prod.apk)
+- Application source: `c8e4ea10c54f5b3e3a1bf344d36e5900a7d2e3a9`, fixed by the source repository's `android-v1.0.11-b50` tag.
+- APK SHA-256: `b700bb8b40d8f06825fb3e678b4535d3d2fd21069de5df11804c3e8d6b8f2375`.
 
-The project version remains **1.0.11**, with shared source set to `1.0.11+42`.
-Build 42 adds remembering passwords entered in this app after successful Wi-Fi
-setup, automatic filling for the exact same SSID, and an eye button to show or
-hide the password. Users can opt out or forget saved passwords. Failed or
-cancelled setup does not save credentials, and forgetting invalidates pending
-older submissions. Passwords use platform secure storage; Android backup and
-device transfer exclude its credential files, and iOS storage settings are
-restricted to the device without synchronization. This does not read Wi-Fi
-passwords saved by the phone's operating system.
+The project version remains **1.0.11**. Build 50 unifies the launcher and app
+header as **GIOS 設備助手**, adds softly pulsing gold next-action captions,
+presents both station choices clearly, and shows neutral upload progress after
+Wi-Fi reset. It retains the current-phone Wi-Fi flow, remembered passwords and
+password visibility toggle from Build 42.
 
-Build 42 retains Build 41's current-phone Wi-Fi and manual entry flow, shared
-iOS/Android page improvements and gateway badge alignment. All 1,575 Flutter
-tests passed and analysis found no issues; an independent reviewer ran 58
-focused tests. The complete APK hash, version, production signer, SDK28
-signature compatibility, 16K alignment and packaged backup resources were
-independently verified. These checks do not establish physical secure-storage,
-backup/restore, device-transfer, iOS Keychain or BLE/PTU acceptance.
+This release uses the exact production-signed APK already installed on the field
+phone. It was built from the tagged source with `-BuildNumber 50`; that source's
+pubspec still says `1.0.11+42`. Main's shared default was subsequently aligned to
+`1.0.11+50` in `54943b3`, without rebuilding or replacing the approved APK.
 
-Three release assets were downloaded and verified before publication. Anonymous
-GitHub downloads and authenticated production HTTPS downloads from the VPS
-matched the approved hashes. Production HTTPS verification used the public
-address, trusted CA and hostname validation; Windows or phone full downloads via the production API
-were not tested in this publication. Build 41 assets and all running services
-remain unchanged. This publication did not install Build 42 on the phone, and
-no iOS archive or upload was performed.
+Version, production signer and full asset hashes were verified. Draft and public
+anonymous GitHub downloads matched the approved files. Authenticated production
+HTTPS downloads from the VPS matched both new Build 50 and old Build 42 hashes,
+using the public address, trusted CA and hostname validation. Old Build 42 assets
+and running services remained unchanged. Per the user's request, no functional
+tests were run for Builds 43–50; these release checks do not establish device
+workflow acceptance or a phone-driven in-app upgrade. No iOS archive or upload
+was performed; its display name was updated in source only.
 Complete or cancel an active commissioning or temporary PTU replacement before
 installing an update.
 
 The historical [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
 and [corrected Android 1.0.1 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
 and [Android 1.0.2 (Build 22)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.2-b22)
-retain their original assets and fixed URLs. New installations should use Build 42.
+retain their original assets and fixed URLs. New installations should use Build 50.
 The original 1.0.0 updater on Android 9 cannot inspect the downloaded APK signing
 information correctly; a manual same-package, same-signature APK installation is
 needed for affected devices. Patched Build 20 and corrected 1.0.1 Build 21 can use
@@ -107,29 +102,31 @@ publish, or modify the application. Use an independently verified APK SHA-256.
 
 ```powershell
 $env:JAVA_HOME = 'C:\Program Files\Android\Android Studio1\jbr'
-py -3 -X utf8 tools/prepare_release.py --apk <signed-prod-apk> --source-commit <full-commit> --expected-apk-sha256 <verified-sha256> --notes-file release-notes/android-v1.0.11-b42.md --android-build-tools <Android-Sdk-build-tools-directory>
+py -3 -X utf8 tools/prepare_release.py --apk <signed-prod-apk> --source-commit <full-commit> --expected-apk-sha256 <verified-sha256> --notes-file <release-notes-file> --android-build-tools <Android-Sdk-build-tools-directory>
 ```
 
 Use the appropriate release notes file for each new release. Review the generated
 manifest and verify the originating source and device acceptance evidence.
 
-Build the current release from the clean application checkout with:
+For a new release, use the approved, unused Build number and a clean checkout.
+Do not rebuild or replace the published Build 50 assets:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber 42 -BuildName 1.0.11
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber <approved-build-number> -BuildName 1.0.11
 ```
 
 ## Upload a draft
 
 Run with the repository owner's GitHub CLI account. Explicitly list the three
 assets; do not upload a whole build directory. Verify the
-prepared manifest first and use its exact APK filename:
+prepared manifest first and use its exact APK filename. Set `$releaseTag` to the
+approved new tag, not an already published tag:
 
 ```powershell
-$releaseDir = 'dist/android-v1.0.11-b42'
+$releaseDir = Join-Path 'dist' $releaseTag
 $manifest = Get-Content -LiteralPath "$releaseDir/android-update.json" -Encoding utf8 | ConvertFrom-Json
 $apkPath = Join-Path $releaseDir $manifest.apk.name
-gh release create android-v1.0.11-b42 --repo jerrywu-voltraware/gateway-commissioning-releases --draft --title 'Android 1.0.11 (Build 42)' --notes-file release-notes/android-v1.0.11-b42.md $apkPath "$releaseDir/android-update.json" "$releaseDir/SHA256SUMS"
+gh release create $releaseTag --repo jerrywu-voltraware/gateway-commissioning-releases --draft --title $releaseTitle --notes-file "release-notes/$releaseTag.md" $apkPath "$releaseDir/android-update.json" "$releaseDir/SHA256SUMS"
 ```
 
 Download the draft assets into a separate directory and verify SHA256SUMS before
@@ -150,7 +147,7 @@ not need a GitHub account to access a published release in their browser.
 This validates package, version, production signer, hash and checksums again:
 
 ```powershell
-py -3 -X utf8 tools/stage_release.py --tag android-v1.0.11-b42 --destination dist/backend-delivery --android-build-tools <Android-Sdk-build-tools-directory> --activate
+py -3 -X utf8 tools/stage_release.py --tag $releaseTag --destination dist/backend-delivery --android-build-tools <Android-Sdk-build-tools-directory> --activate
 ```
 
 For draft review only, replace `--activate` with `--allow-draft`. Drafts cannot

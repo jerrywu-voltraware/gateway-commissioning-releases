@@ -1,24 +1,24 @@
 # APP 提交、發布與更新手冊
 
-適用專案：GIOS 現場開通；建立日期：2026-10-01。程式碼位於 `APP_v2`，Android 發布資料位於 `android_releases`，兩者是不同的 Git repository。以下 Windows 指令以 PowerShell 5.1、工作區 `F:\iot_gateway` 為例。
+適用專案：GIOS 設備助手（2026-10-03 更名，原為 GIOS 現場開通）；建立日期：2026-10-01。程式碼位於 `APP_v2`，Android 發布資料位於 `android_releases`，兩者是不同的 Git repository。以下 Windows 指令以 PowerShell 5.1、工作區 `F:\iot_gateway` 為例。
 
 ## 1. 固定版本規則：1.0.11 不變，只增加 Build
 
 **依使用者決定，APP 版本號固定為 `1.0.11`，後續一般修正與更新不再增加版本號，只增加 Build。** 不得自行改成 `1.0.12`、`1.1.0`，也不得讓自動發布工具按照每次修正自動增加版本號。只有使用者明確改變這項決定時，才另行規劃版本變更。
 
-目前已發布基準是 **`1.0.11 (Build 42)`**（2026-10-03 更新）。Android／iOS 統一在 `APP_v2` 的 `main` 主線開發；本次已發布的核定共同來源以 **APP 來源 repo** 的 `android-v1.0.11-b42` 標籤固定於 commit `b997b7b8e0dcba3169f9f78c732ed42746cc3ad1`（2026-10-03 整理：原工作分支 `feat/wifi-password-tools-20261003` 已退役）。來源標籤與本發布 repo 的同名標籤用途不同；後續文件提交不改變原發布來源。`pubspec.yaml` 為：
+目前已發布基準是 **`1.0.11 (Build 50)`**（2026-10-03 更新，原為 Build 42），正式更新通道已啟用。Android／iOS 統一在 `APP_v2` 的 `main` 主線開發；本次 APK 來源以 **APP 來源 repo** 的 `android-v1.0.11-b50` 標籤固定於 commit `c8e4ea10c54f5b3e3a1bf344d36e5900a7d2e3a9`。來源標籤與本發布 repo 的同名標籤用途不同；後續提交不改變原發布來源。主線 `pubspec.yaml` 已在 `54943b3` 對齊為：
 
 ```yaml
-version: 1.0.11+42
+version: 1.0.11+50
 ```
 
-Build 42 新增記住 APP 輸入的 Wi-Fi 密碼、同 SSID 自動帶入與眼睛顯示／隱藏。只有實際使用本次密碼並確認設定成功後才記住；可取消記住或忘記，失敗與取消不保存。這不是讀取手機系統保存的 Wi-Fi 密碼。密碼使用平台安全儲存，Android 備份／轉移排除對應 secure XML，iOS 設定限本機且不同步。
+本次沿用使用者手機已安裝的同一顆 Build 50 APK，沒有重新編譯。實際標籤來源 c8e4ea1 的 pubspec 仍為 `1.0.11+42`，當時使用 `-BuildNumber 50` 覆寫建置版本；54943b3 只補齊主線預設值。不得因為主線預設值更新而移動來源標籤或替換公開 APK。
 
-Build 42 接續已發布的 Build 41，保留最後 iOS／Android 共用的手機目前 Wi-Fi、手動輸入、近期資料、直連挑選、完成頁與標籤對齊。**Build 40 的來源遺漏已由 Build 41 修正。** 後續必須核對最後核定共同來源與功能，不能因舊分支 APK 的編譯／雜湊通過，就排除後續已完成的共用修改。正式通道本次由41→42，舊41資產與服務保持不變。
+Build 50 包含桌面與頂部名稱統一為「GIOS 設備助手」、金黄色粗體箭頭提示柔和閃爍、站點選擇同時引導兩個選項，以及重設 Wi-Fi 後的中性等待上傳畫面。保留 Build 42 的手機目前 Wi-Fi、記住 APP 成功使用的密碼與眼睛切換。正式通道本次由 42→50，舊 42 資產與服務保持不變。**Build 40 的來源遺漏已由 Build 41 修正。** 後續仍須核對最後核定的共用來源與功能。
 
-本輪未安裝手機、未建置／上傳 iOS，亦未完成實機安全儲存、備份還原／裝置轉移、iOS Keychain、BLE／PTU 驗收。功能、全套1,575項、獨立58項與正式簽章 APK／備份資源已核對；發布的完整下載驗證不代替實機驗收。
+Build 50 已在發布前用 release APK 安裝到手機；本輪發布沒有再次安裝。依使用者要求，Build 43–50 未執行功能測試；只核對建置、正式簽章、版本、三資產下載雜湊及正式更新通道，不代表手機內更新流程或 Wi-Fi／BLE／PTU 實機驗收。iOS 名稱只更新原始碼，未建置／上傳。Build 42 的歷史測試結果不可當成本次功能測試結果。
 
-若兩平台都沒有占用更高的 Build，下一次只改為 `1.0.11+43`，再下一次為 `1.0.11+44`。發布前必須查詢 Android 已發布／已交付安裝的 Build，以及 App Store Connect 已上傳的 Build，確認本次數字尚未使用。**不可回退、重用已交付的 Build，或覆寫已公開的 Release 資產。** 既有早期 Build 21 修正例外不得當成日後重用 Build 的依據。
+若兩平台都沒有占用更高的 Build，下一次只改為 `1.0.11+51`，再下一次為 `1.0.11+52`。發布前必須查詢 Android 已發布／已交付安裝的 Build，以及 App Store Connect 已上傳的 Build，確認本次數字尚未使用。**不可回退、重用已交付的 Build，或覆寫已公開的 Release 資產。** 既有早期 Build 21 修正例外不得當成日後重用 Build 的依據。
 
 **同一核定來源、同一批次的 Android 與 iOS 可以共用相同 Build。** 例如 Android Build 39 已交付，仍可依同批核定來源製作 iOS Build 39；禁止的是同一平台重用該 Build 發布不同內容，不是禁止跨平台對齊。
 
@@ -45,14 +45,14 @@ Android 發布庫維持 **public**，現場人員下載已公開 APK 不需要 G
 
 ## 3. 修改 Build、測試、提交 APP
 
-以下指令從同一個 PowerShell 工作階段依序執行。**`43` 只是 Build 42 後的下一版範例，不是永久預設值**；先依第 1 節核定實際 Build 與來源工作樹，再設定變數。範例不會修改目前已發布的 Build 42。
+以下指令從同一個 PowerShell 工作階段依序執行。**`51` 只是 Build 50 後的下一版範例，不是永久預設值**（2026-10-03 更新：原為 43）；先依第 1 節核定實際 Build 與來源工作樹，再設定變數。範例不會修改目前已發布的 Build 50。
 
 ```powershell
 $workspace = 'F:\iot_gateway'
 $appRoot = Join-Path $workspace 'APP_v2'
 $releaseRoot = Join-Path $workspace 'android_releases'
 $releaseVersion = '1.0.11'
-$releaseBuild = 43
+$releaseBuild = 51
 $releaseTag = "android-v$releaseVersion-b$releaseBuild"
 $releaseRepo = 'jerrywu-voltraware/gateway-commissioning-releases'
 Set-Location -LiteralPath $appRoot
@@ -81,7 +81,7 @@ git diff --cached --stat
 git diff --cached
 ```
 
-確認暫存範圍完整後提交。Commit message 使用英文，例如 `Release Android 1.0.11 build 43`。接著確認工作樹乾淨並記錄完整 commit；不可為正式發布使用 `-AllowDirty`。
+確認暫存範圍完整後提交。Commit message 使用英文，例如 `Release Android 1.0.11 build 51`。接著確認工作樹乾淨並記錄完整 commit；不可為正式發布使用 `-AllowDirty`。
 
 ```powershell
 git commit -m "Release Android $releaseVersion build $releaseBuild"
@@ -237,7 +237,9 @@ if ($LASTEXITCODE -ne 0) { throw 'Local backend delivery verification failed' }
 
 正式站資產根目錄為 `/home/jerrywu/android-app-releases`；不可變目錄為 `releases/<tag>/`。既有後台以 readonly mount 讀取它，提供驗證過的 `/api/app/updates/android/latest` 與 `/api/app/updates/android/<tag>/apk`。單純 APP 發布不需要重建或重啟後台容器。
 
-本次使用工作區 `tools/deployment/android_build42_rollout.py`，**固定只做 `1.0.11 Build 41 → 42`**，並固定來源 `b997b7b8e0dcba3169f9f78c732ed42746cc3ad1`。它不是通用下一版發布器；**下次 Build 43 不可照抄 Build 42 的 helper、run-id、tag、source 或 hash，也不可修改舊 helper 來冒充新的核定流程。**
+2026-10-03 的 Build 50 使用工作區 `tools/deployment/android_build50_rollout.py`、`activate_build50_verified.py` 與 `verify_android50_public_channel.py`，只適用 42→50；唯一 run-id 為 `20261003T124729Z`，實際 source 為 c8e4ea1，完整 pins 與完成證據見工作區 `CONTINUE_2026-10-03_BUILD50_PUBLICATION.md`。公開資產不可覆寫；這些工具不可直接套用下一版。
+
+以下保留 Build 42 的歷史工具說明：`tools/deployment/android_build42_rollout.py` **固定只做 `1.0.11 Build 41 → 42`**，來源 `b997b7b8e0dcba3169f9f78c732ed42746cc3ad1`。它不是通用下一版發布器；後續版本不可照抄舊 helper 的 run-id、tag、source 或 hash，也不可修改舊 helper 來冒充新的核定流程。
 
 Build 42 的正式啟用使用已獨立審查的 `activate_build42_verified.py`：先完整匿名下載，再重查公開 stable/latest 及資產身分、重新計算三資產 hash，最後呼叫相同 rollout 的遠端原子切換。它固定核定 pins、helper hash 與 run-id，只適用此次 Build 42。
 
