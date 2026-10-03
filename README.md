@@ -8,6 +8,12 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 ## Current status
 
+Android **1.0.11 (Build 42)** is being prepared from approved source
+`b997b7b8e0dcba3169f9f78c732ed42746cc3ad1`. It adds remembered Wi-Fi
+passwords, automatic filling for the same SSID and password visibility controls.
+The release and production update channel remain on Build 41 until publication
+and independent delivery verification are complete.
+
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can download published releases without a GitHub account.
 The current release is **Android 1.0.11 (Build 41)**, published on 2026-10-03.
