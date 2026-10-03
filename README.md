@@ -8,41 +8,39 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 ## Current status
 
-Android **1.0.11 (Build 42)** is being prepared from approved source
-`b997b7b8e0dcba3169f9f78c732ed42746cc3ad1`. It adds remembered Wi-Fi
-passwords, automatic filling for the same SSID and password visibility controls.
-The release and production update channel remain on Build 41 until publication
-and independent delivery verification are complete.
-
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can download published releases without a GitHub account.
-The current release is **Android 1.0.11 (Build 41)**, published on 2026-10-03.
-The production in-app update channel is enabled for Build 41.
+The current release is **Android 1.0.11 (Build 42)**, published on 2026-10-03.
+The production in-app update channel is enabled for Build 42.
 
-- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b41)
-- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b41/app_63688a7_b41_prod.apk)
-- Application source: `63688a7c29bf59e4176b57982f026691b055dd20`.
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b42)
+- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b42/app_b997b7b_b42_prod.apk)
+- Application source: `b997b7b8e0dcba3169f9f78c732ed42746cc3ad1`.
 
-The project version remains **1.0.11**, with the shared source set to `1.0.11+41`.
-Build 41 includes the latest shared iOS/Android changes from `f2f4ea0` which were
-missing from Build 40. Wi-Fi setup reads the phone's currently connected network
-name after an explicit tap, retains manual entry, and no longer offers a Wi-Fi
-scan entry. It preserves the recent-data, direct PTU selection and completion
-page changes, plus the gateway connection badge alignment.
+The project version remains **1.0.11**, with shared source set to `1.0.11+42`.
+Build 42 adds remembering passwords entered in this app after successful Wi-Fi
+setup, automatic filling for the exact same SSID, and an eye button to show or
+hide the password. Users can opt out or forget saved passwords. Failed or
+cancelled setup does not save credentials, and forgetting invalidates pending
+older submissions. Passwords use platform secure storage; Android backup and
+device transfer exclude its credential files, and iOS storage settings are
+restricted to the device without synchronization. This does not read Wi-Fi
+passwords saved by the phone's operating system.
 
-All 1,543 Flutter tests passed and analysis found no issues; an independent
-reviewer ran 100 focused tests. The production signer, SDK28 signature
-compatibility, 16K alignment, source and Wi-Fi content in all three ABIs, and
-complete APK hash were independently verified. Two independent test processes
-also checked mock recovery. These checks do not establish physical phone SSID,
-BLE/PTU commissioning acceptance or an Android 133 fix.
+Build 42 retains Build 41's current-phone Wi-Fi and manual entry flow, shared
+iOS/Android page improvements and gateway badge alignment. All 1,575 Flutter
+tests passed and analysis found no issues; an independent reviewer ran 58
+focused tests. The complete APK hash, version, production signer, SDK28
+signature compatibility, 16K alignment and packaged backup resources were
+independently verified. These checks do not establish physical secure-storage,
+backup/restore, device-transfer, iOS Keychain or BLE/PTU acceptance.
 
 Three release assets were downloaded and verified before publication. Anonymous
 GitHub downloads and authenticated production HTTPS downloads from the VPS
 matched the approved hashes. Production HTTPS verification used the public
-address, trusted CA and hostname validation; Windows or phone full downloads
-were not tested in this publication. Build 40 assets and all running services
-remain unchanged. This publication did not install Build 41 on the phone, and
+address, trusted CA and hostname validation; Windows or phone full downloads via the production API
+were not tested in this publication. Build 41 assets and all running services
+remain unchanged. This publication did not install Build 42 on the phone, and
 no iOS archive or upload was performed.
 Complete or cancel an active commissioning or temporary PTU replacement before
 installing an update.
@@ -50,7 +48,7 @@ installing an update.
 The historical [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
 and [corrected Android 1.0.1 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
 and [Android 1.0.2 (Build 22)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.2-b22)
-retain their original assets and fixed URLs. New installations should use Build 41.
+retain their original assets and fixed URLs. New installations should use Build 42.
 The original 1.0.0 updater on Android 9 cannot inspect the downloaded APK signing
 information correctly; a manual same-package, same-signature APK installation is
 needed for affected devices. Patched Build 20 and corrected 1.0.1 Build 21 can use
@@ -109,7 +107,7 @@ publish, or modify the application. Use an independently verified APK SHA-256.
 
 ```powershell
 $env:JAVA_HOME = 'C:\Program Files\Android\Android Studio1\jbr'
-py -3 -X utf8 tools/prepare_release.py --apk <signed-prod-apk> --source-commit <full-commit> --expected-apk-sha256 <verified-sha256> --notes-file release-notes/android-v1.0.11-b41.md --android-build-tools <Android-Sdk-build-tools-directory>
+py -3 -X utf8 tools/prepare_release.py --apk <signed-prod-apk> --source-commit <full-commit> --expected-apk-sha256 <verified-sha256> --notes-file release-notes/android-v1.0.11-b42.md --android-build-tools <Android-Sdk-build-tools-directory>
 ```
 
 Use the appropriate release notes file for each new release. Review the generated
@@ -118,7 +116,7 @@ manifest and verify the originating source and device acceptance evidence.
 Build the current release from the clean application checkout with:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber 41 -BuildName 1.0.11
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber 42 -BuildName 1.0.11
 ```
 
 ## Upload a draft
@@ -128,10 +126,10 @@ assets; do not upload a whole build directory. Verify the
 prepared manifest first and use its exact APK filename:
 
 ```powershell
-$releaseDir = 'dist/android-v1.0.11-b41'
+$releaseDir = 'dist/android-v1.0.11-b42'
 $manifest = Get-Content -LiteralPath "$releaseDir/android-update.json" -Encoding utf8 | ConvertFrom-Json
 $apkPath = Join-Path $releaseDir $manifest.apk.name
-gh release create android-v1.0.11-b41 --repo jerrywu-voltraware/gateway-commissioning-releases --draft --title 'Android 1.0.11 (Build 41)' --notes-file release-notes/android-v1.0.11-b41.md $apkPath "$releaseDir/android-update.json" "$releaseDir/SHA256SUMS"
+gh release create android-v1.0.11-b42 --repo jerrywu-voltraware/gateway-commissioning-releases --draft --title 'Android 1.0.11 (Build 42)' --notes-file release-notes/android-v1.0.11-b42.md $apkPath "$releaseDir/android-update.json" "$releaseDir/SHA256SUMS"
 ```
 
 Download the draft assets into a separate directory and verify SHA256SUMS before
@@ -152,7 +150,7 @@ not need a GitHub account to access a published release in their browser.
 This validates package, version, production signer, hash and checksums again:
 
 ```powershell
-py -3 -X utf8 tools/stage_release.py --tag android-v1.0.11-b41 --destination dist/backend-delivery --android-build-tools <Android-Sdk-build-tools-directory> --activate
+py -3 -X utf8 tools/stage_release.py --tag android-v1.0.11-b42 --destination dist/backend-delivery --android-build-tools <Android-Sdk-build-tools-directory> --activate
 ```
 
 For draft review only, replace `--activate` with `--allow-draft`. Drafts cannot
