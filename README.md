@@ -13,6 +13,12 @@ staff can download published releases without a GitHub account.
 The current release is **Android 1.0.11 (Build 40)**, published on 2026-10-03.
 The production in-app update channel is enabled for Build 40.
 
+Android **1.0.11 (Build 41)** is approved and being prepared for publication
+from source `63688a7c29bf59e4176b57982f026691b055dd20`. It restores the latest
+shared iOS/Android changes, uses the phone's connected Wi-Fi name with manual
+entry as a fallback, and removes the Wi-Fi scan entry. Build 40 remains the
+active channel until the Build 41 public assets and delivery checks complete.
+
 - [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b40)
 - [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b40/app_167dfc7_b40_prod.apk)
 - Application source: `167dfc7acaca18ca23781e2c47abf5ea9a67f968`.
