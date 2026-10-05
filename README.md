@@ -40,6 +40,21 @@ performed during publication. No iOS archive/upload or backend deployment was ma
 Complete or cancel an active commissioning or temporary PTU replacement before
 installing an update.
 
+## Build 52 release candidate (not yet active)
+
+Android 1.0.11 (Build 52) is being prepared. It is **not published and not
+active**; the production update channel remains Build 51 until publication and
+verification are complete.
+
+- Application source: `0a94090d722d6dfe328706579fea0abf7b442ce0`, fixed by the source repository's `android-v1.0.11-b52` tag.
+- APK `app_0a94090_b52_prod.apk` (61,079,635 bytes) SHA-256: `c723b8cdec3691742372b32500cc2500bcc1e536de8962fd0f4fb70256a751ac`.
+- `android-update.json` SHA-256: `e97919bec96bc31950f317c117387936bad8f0c0d272a3af7e05092ae8bae054`.
+- `SHA256SUMS` SHA-256: `818986c5d467c41d5b70a0c638696d0135171c4068d7916ef26ddbb38fe5ad10`.
+- Signer certificate SHA-256: `2ae194573a906afd0a4e3ce347a275551e3e5b27a6d4a2644d36d07d102f4b64`.
+
+Build 52 adds a Traditional Chinese / English language switch (default Traditional
+Chinese; More > Language). Acceptance criteria and commissioning flow are unchanged.
+
 The historical [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
 and [corrected Android 1.0.1 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
 and [Android 1.0.2 (Build 22)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.2-b22)
