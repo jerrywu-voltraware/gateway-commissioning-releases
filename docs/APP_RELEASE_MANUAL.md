@@ -6,19 +6,19 @@
 
 **依使用者決定，APP 版本號固定為 `1.0.11`，後續一般修正與更新不再增加版本號，只增加 Build。** 不得自行改成 `1.0.12`、`1.1.0`，也不得讓自動發布工具按照每次修正自動增加版本號。只有使用者明確改變這項決定時，才另行規劃版本變更。
 
-目前已發布基準是 **`1.0.11 (Build 51)`**（2026-10-03 發布，原為 Build 50），正式更新通道已啟用。Android／iOS 統一在 `APP_v2` 的 `main` 主線開發；Build 51 的 APK 來源以 **APP 來源 repo** 的 `android-v1.0.11-b51` 標籤固定於 commit `3b320c7c60c1f772a709bd7c19cd7fe7eb719832`。來源標籤與本發布 repo 的同名標籤用途不同；後續提交不改變原發布來源。主線 `pubspec.yaml` 目前為：
+目前已發布基準是 **`1.0.11 (Build 52)`**（2026-10-06 發布，原為 Build 51），正式更新通道已啟用。Android／iOS 統一在 `APP_v2` 的 `main` 主線開發；Build 52 的 APK 來源以 **APP 來源 repo** 的 `android-v1.0.11-b52` 標籤固定於 commit `0a94090d722d6dfe328706579fea0abf7b442ce0`。來源標籤與本發布 repo 的同名標籤用途不同；後續提交不改變原發布來源。主線 `pubspec.yaml` 目前為：
 
 ```yaml
-version: 1.0.11+51
+version: 1.0.11+52
 ```
 
-Build 51 由來源 3b320c7 重新建置（`-BuildNumber 51`），三資產 pins 見工作區 `docs/test_results/android_build51_rollout_pins.json`。不得因為主線後續提交而移動來源標籤或替換公開 APK。
+Build 52 由來源 0a94090 建置（共享 pubspec `1.0.11+52`），三資產 pins 見工作區 `docs/test_results/android_build52_rollout_pins.json`。APP main 之後的 49b2297 只改 AGENTS.md 文件，不是發布來源。不得因為主線後續提交而移動來源標籤或替換公開 APK。
 
-Build 51 包含：資料驗證畫面預設只展開正常資料（未計入資料可另開查看，通過標準不變）、等待資料的「剩餘」秒數提示、求助畫面的後台接手狀態與「已解決／仍需協助」回覆，以及求助紀錄的版本與等待狀態回報。正式通道由 50→51，舊 50 資產與服務保持不變。**Build 40 的來源遺漏已由 Build 41 修正。**
+Build 52 包含：中英語系切換（「更多」→「語言」，繁體中文／English；預設繁體中文、記住選擇、不跟隨系統語言），全部畫面文字雙語；英文系統的桌面名稱為「GIOS Device Assistant」；上傳後台的正式報告維持中文。設備設定、連線流程與資料驗證標準不變。正式通道由 51→52，舊 51 資產與服務保持不變。**Build 40 的來源遺漏已由 Build 41 修正。**
 
-Build 51 由使用者自行從 APP 內「檢查更新」安裝；發布輪沒有 ADB 安裝或手機內升級驗收。發布時只核對建置、正式簽章、版本、三資產完整下載雜湊及正式更新通道，不代表 Wi-Fi／BLE／PTU 實機驗收。iOS 未建置／上傳。
+Build 52 由使用者自行從 APP 內「檢查更新」安裝；發布輪沒有 ADB 安裝或手機內升級驗收。發布時只核對建置、正式簽章、版本、三資產完整下載雜湊及正式更新通道，不代表 Wi-Fi／BLE／PTU 實機驗收。iOS 未建置／上傳（iOS 語系檔已在來源準備，交接文件為 APP 來源 repo 的 `docs/ios_i18n_handoff_2026-10-06.md`）。
 
-若兩平台都沒有占用更高的 Build，下一次只改為 `1.0.11+52`，再下一次為 `1.0.11+53`。發布前必須查詢 Android 已發布／已交付安裝的 Build，以及 App Store Connect 已上傳的 Build，確認本次數字尚未使用。**不可回退、重用已交付的 Build，或覆寫已公開的 Release 資產。** 既有早期 Build 21 修正例外不得當成日後重用 Build 的依據。
+若兩平台都沒有占用更高的 Build，下一次只改為 `1.0.11+53`，再下一次為 `1.0.11+54`。發布前必須查詢 Android 已發布／已交付安裝的 Build，以及 App Store Connect 已上傳的 Build，確認本次數字尚未使用。**不可回退、重用已交付的 Build，或覆寫已公開的 Release 資產。** 既有早期 Build 21 修正例外不得當成日後重用 Build 的依據。
 
 **同一核定來源、同一批次的 Android 與 iOS 可以共用相同 Build。** 例如 Android Build 39 已交付，仍可依同批核定來源製作 iOS Build 39；禁止的是同一平台重用該 Build 發布不同內容，不是禁止跨平台對齊。
 
@@ -45,14 +45,14 @@ Android 發布庫維持 **public**，現場人員下載已公開 APK 不需要 G
 
 ## 3. 修改 Build、測試、提交 APP
 
-以下指令從同一個 PowerShell 工作階段依序執行。**`52` 只是 Build 51 後的下一版範例，不是永久預設值**（2026-10-06 更新：原為 51）；先依第 1 節核定實際 Build 與來源工作樹，再設定變數。範例不會修改目前已發布的 Build 51。
+以下指令從同一個 PowerShell 工作階段依序執行。**`53` 只是 Build 52 後的下一版範例，不是永久預設值**（2026-10-06 Build 52 發布後更新：原為 52）；先依第 1 節核定實際 Build 與來源工作樹，再設定變數。範例不會修改目前已發布的 Build 52。
 
 ```powershell
 $workspace = 'E:\iot_gateway'   # company machine: F:\iot_gateway
 $appRoot = Join-Path $workspace 'APP_v2'
 $releaseRoot = Join-Path $workspace 'android_releases'
 $releaseVersion = '1.0.11'
-$releaseBuild = 52
+$releaseBuild = 53
 $releaseTag = "android-v$releaseVersion-b$releaseBuild"
 $releaseRepo = 'jerrywu-voltraware/gateway-commissioning-releases'
 Set-Location -LiteralPath $appRoot
@@ -244,7 +244,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Local backend delivery verification failed' }
 
 2026-10-03 的 **Build 51 已發布並啟用正式通道**，本輪固定 50→51。使用工作區 `tools/deployment/android_build51_rollout.py`、`activate_build51_verified.py`、`verify_android51_public_channel.py`；唯一 run-id `20261003T153839Z`，來源 `3b320c7c60c1f772a709bd7c19cd7fe7eb719832`，共享 pubspec 為 `1.0.11+51`。三資產 pins 在工作區 `docs/test_results/android_build51_rollout_pins.json`；回復資料在 VPS `/home/jerrywu/android-app-releases/.rollout-1.0.11-b51-20261003T153839Z`。草稿、公開匿名完整下載與正式 HTTPS 新51／舊50 APK驗證均通過，正式服務保持本輪基準不變；完整紀錄見 `CONTINUE_2026-10-03_BUILD51_PUBLICATION.md`。使用者自行從 APP 更新，這輪沒有 ADB 安裝或手機內升級驗收。上述工具與公開資產皆固定於 Build 51，不可改寫冒充下一版。
 
-2026-10-06 準備的 **Build 52（候選，尚未啟用，正式更新通道仍為 Build 51）** 固定 51→52，使用工作區 `tools/deployment/android_build52_rollout.py`、`activate_build52_verified.py`、`verify_android52_public_channel.py`、`verify_build52_vps_https.py`、`download_build52_draft.py`（測試 `test_android_build52_rollout.py`，`py -3 -X utf8 -m unittest discover -s tools/deployment -p test_android_build52_rollout.py -v`）。來源 `0a94090d722d6dfe328706579fea0abf7b442ce0`，內容為中英語系切換。舊資產 pins 為 Build 51 三檔；新 pins 在工作區 `docs/test_results/android_build52_rollout_pins.json`，run-id 在 `docs/test_results/build52_rollout_runid.json`。helper 內的 `FILL_AFTER_BUILD`／`FILL_RELEASE_DATE`／`FILL_AT_STAGE` 未填時一律以 `pins_not_filled`／`release_date_not_filled` 拒絕執行。這些工具與資產固定於 Build 52，不可套用下一版。
+2026-10-06 的 **Build 52 已發布並啟用正式通道**，本輪固定 51→52。使用工作區 `tools/deployment/android_build52_rollout.py`、`activate_build52_verified.py`、`verify_android52_public_channel.py`、`verify_build52_vps_https.py`、`download_build52_draft.py`（測試 `test_android_build52_rollout.py`）；唯一 run-id `20261005T181012Z`（`docs/test_results/build52_rollout_runid.json`），來源 `0a94090d722d6dfe328706579fea0abf7b442ce0`，共享 pubspec 為 `1.0.11+52`，GitHub Release ID 403991853。三資產 pins 在工作區 `docs/test_results/android_build52_rollout_pins.json`；回復資料在 VPS `/home/jerrywu/android-app-releases/.rollout-1.0.11-b52-20261005T181012Z`。正式指標約 2026-10-05 18:16 UTC（台灣 10-06 02:16）由 51 切換為 52。草稿、公開匿名完整下載與正式 HTTPS 新52／舊51 APK 驗證均通過，正式服務保持本輪基準不變；完整紀錄見工作區 `CONTINUE_2026-10-06_BUILD52_PUBLICATION.md` 與 `docs/test_results/build52_publication_2026-10-06.md`。使用者自行從 APP 更新，這輪沒有 ADB 安裝或手機內升級驗收。上述工具與公開資產皆固定於 Build 52，不可改寫冒充下一版。
 
 以下保留 Build 42 的歷史工具說明：`tools/deployment/android_build42_rollout.py` **固定只做 `1.0.11 Build 41 → 42`**，來源 `b997b7b8e0dcba3169f9f78c732ed42746cc3ad1`。它不是通用下一版發布器；後續版本不可照抄舊 helper 的 run-id、tag、source 或 hash，也不可修改舊 helper 來冒充新的核定流程。
 

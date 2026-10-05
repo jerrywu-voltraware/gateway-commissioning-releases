@@ -10,55 +10,47 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can download published releases without a GitHub account.
-The current release is **GIOS 設備助手 — Android 1.0.11 (Build 51)**, published on 2026-10-03.
-The production in-app update channel is enabled for Build 51.
+The current release is **GIOS 設備助手 — Android 1.0.11 (Build 52)**, published on 2026-10-06 (2026-10-05T18:14:34Z).
+The production in-app update channel is enabled for Build 52.
 
-- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b51)
-- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b51/app_3b320c7_b51_prod.apk)
-- Application source: `3b320c7c60c1f772a709bd7c19cd7fe7eb719832`, fixed by the source repository's `android-v1.0.11-b51` tag.
-- APK SHA-256: `b77f129ce6b2207037998ba85bbccf6fc1b5ed36adcd980a8b1abd59491c6136`.
-
-Build 51 keeps rejected verification samples collapsed by default and labels the
-remaining countdown clearly, without changing acceptance criteria. The help sheet
-can show backend guidance and accept an explicit field response. Reports identify
-the installed app version and distinguish idle waiting from an operation in progress.
-An older backend falls back to telephone guidance without repeatedly polling an
-unsupported reply endpoint. Existing Wi-Fi setup, remembered passwords, gold
-next-action hints and the GIOS 設備助手 display name are retained.
-
-This production-signed APK was built from the tagged shared main source, whose
-pubspec is `1.0.11+51`. Version, package, signer and all three asset hashes passed
-independent review. Focused app checks and offline publication guard checks passed.
-Full draft and anonymous public GitHub downloads matched the approved files.
-Authenticated production HTTPS downloads from the VPS matched both new Build 51
-and old Build 50 hashes, using the public address, trusted CA and hostname checks.
-The old assets and running services remained unchanged by this publication.
-
-The user will install using the app's Check for updates menu. No ADB installation,
-phone-driven upgrade, real BLE/PTU workflow or two-way rescue conversation was
-performed during publication. No iOS archive/upload or backend deployment was made.
-Complete or cancel an active commissioning or temporary PTU replacement before
-installing an update.
-
-## Build 52 release candidate (not yet active)
-
-Android 1.0.11 (Build 52) is being prepared. It is **not published and not
-active**; the production update channel remains Build 51 until publication and
-verification are complete.
-
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b52)
+- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b52/app_0a94090_b52_prod.apk)
 - Application source: `0a94090d722d6dfe328706579fea0abf7b442ce0`, fixed by the source repository's `android-v1.0.11-b52` tag.
 - APK `app_0a94090_b52_prod.apk` (61,079,635 bytes) SHA-256: `c723b8cdec3691742372b32500cc2500bcc1e536de8962fd0f4fb70256a751ac`.
 - `android-update.json` SHA-256: `e97919bec96bc31950f317c117387936bad8f0c0d272a3af7e05092ae8bae054`.
 - `SHA256SUMS` SHA-256: `818986c5d467c41d5b70a0c638696d0135171c4068d7916ef26ddbb38fe5ad10`.
 - Signer certificate SHA-256: `2ae194573a906afd0a4e3ce347a275551e3e5b27a6d4a2644d36d07d102f4b64`.
 
-Build 52 adds a Traditional Chinese / English language switch (default Traditional
-Chinese; More > Language). Acceptance criteria and commissioning flow are unchanged.
+Build 52 adds a Traditional Chinese / English language switch (More > Language).
+The default is Traditional Chinese and the choice is remembered on the phone; it
+does not follow the system language. On an English-language phone the launcher
+name is "GIOS Device Assistant". Formal installation reports uploaded to the
+backend remain in Chinese. Device settings, connection flow and data acceptance
+criteria are unchanged.
+
+This production-signed APK was built from the tagged shared main source, whose
+pubspec is `1.0.11+52`. Version, package, signer and all three asset hashes passed
+independent review. Full draft and anonymous public GitHub downloads matched the
+approved files. Authenticated production HTTPS downloads from the VPS matched both
+new Build 52 and old Build 51 hashes, using the public address, trusted CA and
+hostname checks. The old assets and running services remained unchanged by this
+publication.
+
+The user will install using the app's Check for updates menu. No ADB installation,
+phone-driven upgrade or real BLE/PTU workflow was performed during publication.
+No iOS archive/upload or backend deployment was made.
+Complete or cancel an active commissioning or temporary PTU replacement before
+installing an update.
+
+The previous release, [Android 1.0.11 (Build 51)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b51)
+(source `3b320c7c60c1f772a709bd7c19cd7fe7eb719832`, APK SHA-256
+`b77f129ce6b2207037998ba85bbccf6fc1b5ed36adcd980a8b1abd59491c6136`), retains its
+original assets and fixed URL.
 
 The historical [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
 and [corrected Android 1.0.1 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
 and [Android 1.0.2 (Build 22)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.2-b22)
-retain their original assets and fixed URLs. New installations should use Build 51.
+retain their original assets and fixed URLs. New installations should use Build 52.
 The original 1.0.0 updater on Android 9 cannot inspect the downloaded APK signing
 information correctly; a manual same-package, same-signature APK installation is
 needed for affected devices. Patched Build 20 and corrected 1.0.1 Build 21 can use
@@ -124,7 +116,7 @@ Use the appropriate release notes file for each new release. Review the generate
 manifest and verify the originating source and device acceptance evidence.
 
 For a new release, use the approved, unused Build number and a clean checkout.
-Do not rebuild or replace the published Build 51 or earlier assets:
+Do not rebuild or replace the published Build 52 or earlier assets:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber <approved-build-number> -BuildName 1.0.11
