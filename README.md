@@ -8,18 +8,17 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 ## Current status
 
-## Android Build62 active - 2026-10-06 20:12 Taiwan
+## Android Build64 active - 2026-10-06 21:39 Taiwan
 
-- Version 1.0.11 Build62; source `801a304c580537ce1b6ba346b79d7b65d5227666`, tag `android-v1.0.11-b62`.
-- Recent data cards show vehicle type above power: same-sample PRU Type 1=E-Bike, 2=E-Scooter, missing/other=Unknown. Includes Build61 setup cleanup (duplicate data entry removed; environment badge in header).
-- Backend d47c5e5 deployed at `/home/jerrywu/gateway-management-deployments/20261006T120623Z-pru-type`; only dashboard-api recreated with authorization. No schema/firmware change. Health/source/auth checks passed; production recent API returned pru_type=1 for 81/1 and 20/1. Other containers and gateway command counts unchanged.
-- APK `app_801a304_b62_prod.apk`, 61243812 bytes, SHA256 `987bebf8833f3e3fcee2c83685bbd1931f89723add089ed45f666a93cea9e937`. Release build, official signature and version checks passed; vehicle labels verified in all three APK architectures; Chinese manifest and production update notes verified.
-- Draft/public complete downloads and production HTTPS readback passed. GitHub Release 404663131 stable/latest; run-id `20261006T120116Z`. Old Build60 assets preserved; all nine running containers unchanged during APP publication after the backend deployment baseline.
-- Scoped Dart analysis and backend Python syntax checks passed. Functional tests not run per user request; physical phone update validation remains with user. No iOS publication.
-- Evidence: `docs/test_results/build62_backend_verification.json`, `build62_unicode_verification.json`, `build62_draft_verification_2026-10-06.json`, `android_build62_public_channel_github_2026-10-06.json`, `android_build62_public_channel_post_2026-10-06.json`, `android_build62_rollout_pins.json`.
-- Authorized APP rollback only: `py -3 -X utf8 tools/deployment/run_build62_rollout.py rollback` restores the pointer to60 and preserves assets; installed phones are not downgraded. Backend rollback helper remains in the deployment stage; do not execute without authorization.
+- Version 1.0.11 Build64; source `bcd06eec4489b1af8fb05b226e5706781f0063a2`, tag `android-v1.0.11-b64`.
+- Home heading now says Choose an action; duplicate subtitle removed. Includes Build63 fix: update dialog checks its own route visibility and keeps existing foreground/session/BLE guards, so it no longer disables its own update button.
+- APK `app_bcd06ee_b64_prod.apk`, 61243812 bytes, SHA256 `d24cfe05a8eb253c37982347ab19af2966e3998bd2bf85e9101993204ff797a2`. Release build, official signature and version checks passed; home/update labels verified in all three APK architectures; Chinese manifest and production update notes verified.
+- Draft/public complete downloads and production HTTPS readback passed. GitHub Release 404752600 stable/latest; run-id `20261006T133351Z`. Old Build62 assets preserved; all nine running containers unchanged during APP publication from the pre-publication baseline; no backend deployment/restart.
+- Scoped Dart analysis checks passed. Functional tests not run per user request; physical phone update validation remains with user. No iOS publication.
+- Evidence: `build64_unicode_verification.json`, `build64_draft_verification_2026-10-06.json`, `android_build64_public_channel_github_2026-10-06.json`, `android_build64_public_channel_post_2026-10-06.json`, `android_build64_rollout_pins.json`.
+- Authorized APP rollback only: `py -3 -X utf8 tools/deployment/run_build64_rollout.py rollback` restores the pointer to62 and preserves assets; installed phones are not downgraded.
 
-Next candidate Build: 63.
+Next candidate Build: 65.
 
 ## Previous Build 55 publication (historical)
 

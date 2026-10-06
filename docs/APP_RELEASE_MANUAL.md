@@ -1,5 +1,17 @@
 # APP 提交、發布與更新手冊
 
+## Android Build64 active - 2026-10-06 21:39 Taiwan
+
+- Version 1.0.11 Build64; source `bcd06eec4489b1af8fb05b226e5706781f0063a2`, tag `android-v1.0.11-b64`.
+- Home heading now says Choose an action; duplicate subtitle removed. Includes Build63 fix: update dialog checks its own route visibility and keeps existing foreground/session/BLE guards, so it no longer disables its own update button.
+- APK `app_bcd06ee_b64_prod.apk`, 61243812 bytes, SHA256 `d24cfe05a8eb253c37982347ab19af2966e3998bd2bf85e9101993204ff797a2`. Release build, official signature and version checks passed; home/update labels verified in all three APK architectures; Chinese manifest and production update notes verified.
+- Draft/public complete downloads and production HTTPS readback passed. GitHub Release 404752600 stable/latest; run-id `20261006T133351Z`. Old Build62 assets preserved; all nine running containers unchanged during APP publication from the pre-publication baseline; no backend deployment/restart.
+- Scoped Dart analysis checks passed. Functional tests not run per user request; physical phone update validation remains with user. No iOS publication.
+- Evidence: `build64_unicode_verification.json`, `build64_draft_verification_2026-10-06.json`, `android_build64_public_channel_github_2026-10-06.json`, `android_build64_public_channel_post_2026-10-06.json`, `android_build64_rollout_pins.json`.
+- Authorized APP rollback only: `py -3 -X utf8 tools/deployment/run_build64_rollout.py rollback` restores the pointer to62 and preserves assets; installed phones are not downgraded.
+
+Next candidate Build: 65. Older entries below are historical.
+
 ## Android Build62 active - 2026-10-06 20:12 Taiwan
 
 - Version 1.0.11 Build62; source `801a304c580537ce1b6ba346b79d7b65d5227666`, tag `android-v1.0.11-b62`.
