@@ -42,6 +42,27 @@ No iOS archive/upload or backend deployment was made.
 Complete or cancel an active commissioning or temporary PTU replacement before
 installing an update.
 
+## Build 53 release candidate (not yet active)
+
+Android 1.0.11 (Build 53) is being prepared. It is **not active**; the production
+in-app update channel remains Build 52 until publication and verification are
+complete.
+
+- Application source: `4de830202ad13414ca8cb380050a2e463a6ee87a`, fixed by the source repository's `android-v1.0.11-b53` tag.
+- APK `app_4de8302_b53_prod.apk` (61,161,555 bytes) SHA-256: `6517087ad1d2625480badd5cfef7a82c978204955cf8edfb96b3d574a8cc4a15`.
+- `android-update.json` SHA-256: `1440a9e8f173ce3066fa287122a7c9d3f2d54637d122935538c6c6656f7e8b1c`.
+- `SHA256SUMS` SHA-256: `aadb1a029564c9da55698ac21e57f781c4ad01fbd767e1afdc3b3865f92e9163`.
+- Signer certificate SHA-256: `2ae194573a906afd0a4e3ce347a275551e3e5b27a6d4a2644d36d07d102f4b64`.
+
+Build 53 changes the recent uploaded data page: current now shows the receiver
+output current (PRU IOUT) instead of the transmitter input current; transmitter
+and receiver temperatures are shown separately, with efficiency, device error
+code descriptions and the receiver MAC. The header title stays on one line, with
+the back-office help and environment controls on a second row. The new fields
+require backend v1.37.0 and show `--` until it is deployed. Known issue: on small
+screens with large text some pages need scrolling, and English recent-data
+column headers may be truncated.
+
 The previous release, [Android 1.0.11 (Build 51)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b51)
 (source `3b320c7c60c1f772a709bd7c19cd7fe7eb719832`, APK SHA-256
 `b77f129ce6b2207037998ba85bbccf6fc1b5ed36adcd980a8b1abd59491c6136`), retains its
