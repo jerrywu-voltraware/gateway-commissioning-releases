@@ -1,5 +1,12 @@
 # APP 提交、發布與更新手冊
 
+## Build 57 publication ? 2026-10-06 16:55 Taiwan
+
+Android 1.0.11 Build 57 is public and active. Source `4a9fb3ce59e8e94226499881ba1f31c592b31263`, source tag `android-v1.0.11-b57`, shared version `1.0.11+57`; next candidate Build 58. Do not reuse 57.
+Release ID `404499954`; run-id `20261006T084932Z`. Helpers: `tools/deployment/*build57*`, `verify_android57_public_channel.py`; pins: `docs/test_results/android_build57_rollout_pins.json`.
+Backend dependency deployed at stage `20261006T085400Z-vbat-display`; raw Vbat API and display-only conversion. Evidence: workspace `docs/test_results/build57_publication_2026-10-06.md`. All previous status sections below are historical.
+
+
 ## 最新狀態：2026-10-06 16:20（優先於下方歷史範例）
 
 Android **1.0.11 Build 56** 已公開並啟用更新。來源 `f2318faacc6dfc9526f5329a1e8f9e7fc0374b10`，來源 tag `android-v1.0.11-b56`，共享版號 `1.0.11+56`；下一候選 Build 57，不可重用 56。
