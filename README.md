@@ -8,6 +8,21 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 ## Current status
 
+Android **1.0.11 (Build 55)** was published and enabled for in-app updates on
+2026-10-06 at approximately 16:09 Taiwan time (08:09 UTC).
+
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b55)
+- Source: `131a1e8fca576b0d0ea55696b4c1984a1997caca`, source tag `android-v1.0.11-b55`.
+- APK: `app_131a1e8_b55_prod.apk`, 61,243,812 bytes.
+- APK SHA-256: `1d26ad26d80fdb8201c90b55118b51ef5f48e611bbcc3499815e2b262d3d1b00`.
+- Recent data refreshes every 2 seconds while visible in the foreground; data age updates every second. Background polling stops. Gateway upload policy is unchanged.
+- Formal signature, artifact metadata, full draft/public downloads, and production HTTPS update-channel read-back passed. Build 54 assets and running services were preserved.
+- Functional tests were not run at the user's request. Phone installation and functional acceptance remain with the user. No ADB installation or iOS publication.
+- Shared source version: `1.0.11+55`; next candidate Build: 56.
+
+## Previous Build 54 publication (historical)
+
+
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can download published releases without a GitHub account.
 The current release is **GIOS 設備助手 — Android 1.0.11 (Build 54)**, published on 2026-10-06 (2026-10-06T07:22:16Z).
