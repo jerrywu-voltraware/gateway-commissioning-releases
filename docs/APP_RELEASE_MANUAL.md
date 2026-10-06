@@ -1,5 +1,17 @@
 # APP 提交、發布與更新手冊
 
+## Android Build60 active - 2026-10-06 19:37 Taiwan
+
+- Version1.0.11 Build60; source `54f3855ac96cbd9c6716790be22715d94ea7b3bf`, tag `android-v1.0.11-b60`.
+- Added dual-entry home: Field Setup opens the existing commissioning preparation/resume flow; View Data opens the site/gateway list. Home retains environment and update/language/theme menu. Setup start back, leave-list and completion return home; configure-next stays in setup. Active setup keeps its existing end confirmation.
+- APK `app_54f3855_b60_prod.apk`, 61243812 bytes, SHA256 `fb2638b9e88da429a856eec6017263d3554d7454e9e4c7f24ee8d2fe65a889f4`. Build/signature/version checks passed. Exact Unicode home/charging labels verified in all three APK architectures; manifest notes and production update API Chinese notes verified.
+- Draft/public complete downloads and production HTTPS readback passed. GitHub Release 404633941 stable/latest; run-id `20261006T113203Z`. Old59 assets and all nine backend containers unchanged.
+- Scoped static analysis had no errors; one braces style info was fixed. No functional tests or physical-device acceptance; user validates via phone update. No iOS publication.
+- Evidence: docs/test_results/build60_unicode_verification.json, build60_draft_verification_2026-10-06.json, android_build60_public_channel_github_2026-10-06.json, android_build60_public_channel_post_2026-10-06.json, android_build60_rollout_pins.json.
+- Authorized rollback only: `py -3 -X utf8 tools/deployment/run_build60_rollout.py rollback` restores the pointer to59, preserving assets; installed phones are not downgraded.
+
+Next candidate Build: 61. Older entries below are historical.
+
 ## Android Build 59 published and active - 2026-10-06 19:02 Taiwan
 
 - Version 1.0.11, Build 59; source `82437ddf8c238ae92ae602e9f0ea0ddac8269d64`, source tag `android-v1.0.11-b59`.

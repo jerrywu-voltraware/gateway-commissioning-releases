@@ -8,18 +8,17 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 ## Current status
 
-Android Build 59 published and active - 2026-10-06 19:02 Taiwan
+## Android Build60 active - 2026-10-06 19:37 Taiwan
 
-- Version 1.0.11, Build 59; source `82437ddf8c238ae92ae602e9f0ea0ddac8269d64`, source tag `android-v1.0.11-b59`.
-- Corrects the three Chinese charging labels and release notes that became question marks in Build58. Exact Chinese code points verified in source, generated localization, UTF8 notes, manifest and all three APK architectures. Evidence: docs/test_results/build59_unicode_verification.json.
-- APK `app_82437dd_b59_prod.apk`, 61,243,812 bytes; SHA256 `0db28286ee3e7fcfd84489cf173f5e83b0f4707073b815958ca343379ba87e7b`. Production signer verified; metadata and full draft/public downloads passed.
-- GitHub Release 404604347 public stable/latest; VPS run-id `20261006T105707Z`. Production HTTPS readback confirms Build59 and complete APK hash. Old58 assets and all nine services unchanged.
-- No functional tests, ADB installation or iOS publication; user will validate via phone update.
-- Signed build passed in70.6 seconds; no build-environment changes were needed for Build59.
-- Evidence: docs/test_results/android_build59_rollout_pins.json, build59_draft_verification_2026-10-06.json, android_build59_public_channel_github_2026-10-06.json, android_build59_public_channel_post_2026-10-06.json.
-- Authorized rollback only: `py -3 -X utf8 tools/deployment/run_build59_rollout.py rollback` restores pointer to58 using recorded run-id and preserves assets. It does not downgrade installed phones.
+- Version1.0.11 Build60; source `54f3855ac96cbd9c6716790be22715d94ea7b3bf`, tag `android-v1.0.11-b60`.
+- Added dual-entry home: Field Setup opens the existing commissioning preparation/resume flow; View Data opens the site/gateway list. Home retains environment and update/language/theme menu. Setup start back, leave-list and completion return home; configure-next stays in setup. Active setup keeps its existing end confirmation.
+- APK `app_54f3855_b60_prod.apk`, 61243812 bytes, SHA256 `fb2638b9e88da429a856eec6017263d3554d7454e9e4c7f24ee8d2fe65a889f4`. Build/signature/version checks passed. Exact Unicode home/charging labels verified in all three APK architectures; manifest notes and production update API Chinese notes verified.
+- Draft/public complete downloads and production HTTPS readback passed. GitHub Release 404633941 stable/latest; run-id `20261006T113203Z`. Old59 assets and all nine backend containers unchanged.
+- Scoped static analysis had no errors; one braces style info was fixed. No functional tests or physical-device acceptance; user validates via phone update. No iOS publication.
+- Evidence: docs/test_results/build60_unicode_verification.json, build60_draft_verification_2026-10-06.json, android_build60_public_channel_github_2026-10-06.json, android_build60_public_channel_post_2026-10-06.json, android_build60_rollout_pins.json.
+- Authorized rollback only: `py -3 -X utf8 tools/deployment/run_build60_rollout.py rollback` restores the pointer to59, preserving assets; installed phones are not downgraded.
 
-- Shared source version: `1.0.11+59`; next candidate Build: 60.
+Next candidate Build: 61.
 
 ## Previous Build 55 publication (historical)
 
