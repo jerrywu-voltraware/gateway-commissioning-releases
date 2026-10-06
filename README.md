@@ -8,6 +8,20 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 ## Current status
 
+Android **1.0.11 (Build 56)** was published and enabled for in-app updates on
+2026-10-06 at approximately 16:20 Taiwan time (08:20 UTC).
+
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b56)
+- Source: `f2318faacc6dfc9526f5329a1e8f9e7fc0374b10`, source tag `android-v1.0.11-b56`.
+- APK: `app_f2318fa_b56_prod.apk`, 61,243,812 bytes.
+- APK SHA-256: `7135280b1a4e45ee74a4d79d13b44d888aa7c9677c1c940e43c4129be43768c4`.
+- Gateway lists are grouped by site, collapsed by default, with gateway counts. Existing gateway actions and Build 55 automatic recent-data refresh are retained.
+- Formal signature, metadata, complete draft/public downloads and production HTTPS read-back passed. Old Build 55 assets and services were preserved.
+- No functional tests per user request; phone update and acceptance remain with the user. No ADB or iOS publication.
+- Shared source version: `1.0.11+56`; next candidate Build: 57.
+
+## Previous Build 55 publication (historical)
+
 Android **1.0.11 (Build 55)** was published and enabled for in-app updates on
 2026-10-06 at approximately 16:09 Taiwan time (08:09 UTC).
 

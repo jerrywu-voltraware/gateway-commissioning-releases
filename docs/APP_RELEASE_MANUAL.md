@@ -1,5 +1,13 @@
 # APP 提交、發布與更新手冊
 
+## 最新狀態：2026-10-06 16:20（優先於下方歷史範例）
+
+Android **1.0.11 Build 56** 已公開並啟用更新。來源 `f2318faacc6dfc9526f5329a1e8f9e7fc0374b10`，來源 tag `android-v1.0.11-b56`，共享版號 `1.0.11+56`；下一候選 Build 57，不可重用 56。
+
+本版將三區閘道器清單依站號分組，預設收合，顯示台數並保留原操作。依使用者要求未跑功能測試，由使用者透過更新安裝驗收。正式簽章、完整草稿／公開下載與正式 HTTPS 回讀通過，舊 Build 55 與服務保持不變。
+
+本輪工具為工作區 `tools/deployment/*build56*`、`verify_android56_public_channel.py`；pins 為 `docs/test_results/android_build56_rollout_pins.json`，run-id `20261006T081905Z`。進度／回滾參數見 `CONTINUE_2026-10-06_BUILD56_PUBLICATION.md`。
+
 ## 最新狀態：2026-10-06 16:09（優先於下方 Build 54 歷史範例）
 
 Android **1.0.11 Build 55** 已公開並啟用正式更新通道。來源 `131a1e8fca576b0d0ea55696b4c1984a1997caca`，來源標籤 `android-v1.0.11-b55`，共享版號 `1.0.11+55`；下一候選為 Build 56，不可重用 55。
