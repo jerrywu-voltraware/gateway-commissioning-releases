@@ -45,6 +45,21 @@ No iOS archive/upload was made, and this publication did not deploy the backend.
 Complete or cancel an active commissioning or temporary PTU replacement before
 installing an update.
 
+## Build 54 release candidate (not yet active)
+
+Android 1.0.11 (Build 54) is being prepared. It is **not active**; the production
+in-app update channel remains Build 53 until publication and verification are
+complete.
+
+- Application source: `549a3ff0bf0fb5314c2b6583086ddd593fedd239`, fixed by the source repository's `android-v1.0.11-b54` tag.
+- APK `app_549a3ff_b54_prod.apk` (61,243,812 bytes) SHA-256: `56201d180ca8dec6bc0c31787d67dc4b066c77ff422d842e1ac0b0aa2bab585c`.
+- `android-update.json` SHA-256: `87bf4651b3b483e43138dcd4d1a082c6189ae1f75cc0322ce0c47fa389d4d404`.
+- `SHA256SUMS` SHA-256: `565c59fc4166b393b480f18e76123e563206cfb04c1e74141ddec47708421c8f`.
+- Signer certificate SHA-256: `2ae194573a906afd0a4e3ce347a275551e3e5b27a6d4a2644d36d07d102f4b64`.
+
+Build 54 changes the launcher icon to the Voltraware logo (Android adaptive icon).
+There are no other application changes. Known issues are the same as Build 53.
+
 The previous release, [GIOS 設備助手 1.0.11 (Build 52)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b52)
 (source `0a94090d722d6dfe328706579fea0abf7b442ce0`, APK SHA-256
 `c723b8cdec3691742372b32500cc2500bcc1e536de8962fd0f4fb70256a751ac`), and
