@@ -1,5 +1,18 @@
 # APP 提交、發布與更新手冊
 
+## Android Build62 active - 2026-10-06 20:12 Taiwan
+
+- Version 1.0.11 Build62; source `801a304c580537ce1b6ba346b79d7b65d5227666`, tag `android-v1.0.11-b62`.
+- Recent data cards show vehicle type above power: same-sample PRU Type 1=E-Bike, 2=E-Scooter, missing/other=Unknown. Includes Build61 setup cleanup (duplicate data entry removed; environment badge in header).
+- Backend d47c5e5 deployed at `/home/jerrywu/gateway-management-deployments/20261006T120623Z-pru-type`; only dashboard-api recreated with authorization. No schema/firmware change. Health/source/auth checks passed; production recent API returned pru_type=1 for 81/1 and 20/1. Other containers and gateway command counts unchanged.
+- APK `app_801a304_b62_prod.apk`, 61243812 bytes, SHA256 `987bebf8833f3e3fcee2c83685bbd1931f89723add089ed45f666a93cea9e937`. Release build, official signature and version checks passed; vehicle labels verified in all three APK architectures; Chinese manifest and production update notes verified.
+- Draft/public complete downloads and production HTTPS readback passed. GitHub Release 404663131 stable/latest; run-id `20261006T120116Z`. Old Build60 assets preserved; all nine running containers unchanged during APP publication after the backend deployment baseline.
+- Scoped Dart analysis and backend Python syntax checks passed. Functional tests not run per user request; physical phone update validation remains with user. No iOS publication.
+- Evidence: `docs/test_results/build62_backend_verification.json`, `build62_unicode_verification.json`, `build62_draft_verification_2026-10-06.json`, `android_build62_public_channel_github_2026-10-06.json`, `android_build62_public_channel_post_2026-10-06.json`, `android_build62_rollout_pins.json`.
+- Authorized APP rollback only: `py -3 -X utf8 tools/deployment/run_build62_rollout.py rollback` restores the pointer to60 and preserves assets; installed phones are not downgraded. Backend rollback helper remains in the deployment stage; do not execute without authorization.
+
+Next candidate Build: 63. Older entries below are historical.
+
 ## Android Build60 active - 2026-10-06 19:37 Taiwan
 
 - Version1.0.11 Build60; source `54f3855ac96cbd9c6716790be22715d94ea7b3bf`, tag `android-v1.0.11-b60`.
