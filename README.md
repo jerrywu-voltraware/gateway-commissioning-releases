@@ -8,18 +8,18 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 ## Current status
 
-Android Build 58 published and active ? 2026-10-06 18:53 Taiwan
+Android Build 59 published and active - 2026-10-06 19:02 Taiwan
 
-- Version 1.0.11, Build 58; source `859fa0a232c1b0a54aeb6babbbf502e8f3bceb7e`, source tag `android-v1.0.11-b58`.
-- Recent cards and history show PTU input power, PRU output power, overall efficiency, Battery Voltage, Charging Current, and System Status / Fault; abnormal samples show Fault Code. MACs, timestamps and auto-refresh preserved.
-- APK `app_859fa0a_b58_prod.apk`, 61,243,812 bytes; SHA256 `3caf5239f5b73f84bf58e90b250b590c1fb4f5ef1af2654ac6bddd06640b16c3`. Production signer verified; metadata and full draft/public downloads passed.
-- GitHub Release 404598541 public stable/latest; VPS run-id `20261006T104905Z`. Production HTTPS readback confirms Build58 and complete APK hash. Old57 assets and all nine services unchanged.
+- Version 1.0.11, Build 59; source `82437ddf8c238ae92ae602e9f0ea0ddac8269d64`, source tag `android-v1.0.11-b59`.
+- Corrects the three Chinese charging labels and release notes that became question marks in Build58. Exact Chinese code points verified in source, generated localization, UTF8 notes, manifest and all three APK architectures. Evidence: docs/test_results/build59_unicode_verification.json.
+- APK `app_82437dd_b59_prod.apk`, 61,243,812 bytes; SHA256 `0db28286ee3e7fcfd84489cf173f5e83b0f4707073b815958ca343379ba87e7b`. Production signer verified; metadata and full draft/public downloads passed.
+- GitHub Release 404604347 public stable/latest; VPS run-id `20261006T105707Z`. Production HTTPS readback confirms Build59 and complete APK hash. Old58 assets and all nine services unchanged.
 - No functional tests, ADB installation or iOS publication; user will validate via phone update.
-- Initial build failed on stale company-machine caches; moving generated caches aside resolved it. Source/dependency versions unchanged. Cache backup remains APP_v2/.build58-cache (ignored).
-- Evidence: docs/test_results/android_build58_rollout_pins.json, build58_draft_verification_2026-10-06.json, android_build58_public_channel_github_2026-10-06.json, android_build58_public_channel_post_2026-10-06.json.
-- Authorized rollback only: `py -3 -X utf8 tools/deployment/run_build58_rollout.py rollback` restores pointer to57 using recorded run-id and preserves assets. It does not downgrade installed phones.
+- Signed build passed in70.6 seconds; no build-environment changes were needed for Build59.
+- Evidence: docs/test_results/android_build59_rollout_pins.json, build59_draft_verification_2026-10-06.json, android_build59_public_channel_github_2026-10-06.json, android_build59_public_channel_post_2026-10-06.json.
+- Authorized rollback only: `py -3 -X utf8 tools/deployment/run_build59_rollout.py rollback` restores pointer to58 using recorded run-id and preserves assets. It does not downgrade installed phones.
 
-- Shared source version: `1.0.11+58`; next candidate Build: 59.
+- Shared source version: `1.0.11+59`; next candidate Build: 60.
 
 ## Previous Build 55 publication (historical)
 
