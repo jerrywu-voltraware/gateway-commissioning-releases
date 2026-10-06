@@ -1,5 +1,18 @@
 # APP 提交、發布與更新手冊
 
+## Android Build 58 published and active ? 2026-10-06 18:53 Taiwan
+
+- Version 1.0.11, Build 58; source `859fa0a232c1b0a54aeb6babbbf502e8f3bceb7e`, source tag `android-v1.0.11-b58`.
+- Recent cards and history show PTU input power, PRU output power, overall efficiency, Battery Voltage, Charging Current, and System Status / Fault; abnormal samples show Fault Code. MACs, timestamps and auto-refresh preserved.
+- APK `app_859fa0a_b58_prod.apk`, 61,243,812 bytes; SHA256 `3caf5239f5b73f84bf58e90b250b590c1fb4f5ef1af2654ac6bddd06640b16c3`. Production signer verified; metadata and full draft/public downloads passed.
+- GitHub Release 404598541 public stable/latest; VPS run-id `20261006T104905Z`. Production HTTPS readback confirms Build58 and complete APK hash. Old57 assets and all nine services unchanged.
+- No functional tests, ADB installation or iOS publication; user will validate via phone update.
+- Initial build failed on stale company-machine caches; moving generated caches aside resolved it. Source/dependency versions unchanged. Cache backup remains APP_v2/.build58-cache (ignored).
+- Evidence: docs/test_results/android_build58_rollout_pins.json, build58_draft_verification_2026-10-06.json, android_build58_public_channel_github_2026-10-06.json, android_build58_public_channel_post_2026-10-06.json.
+- Authorized rollback only: `py -3 -X utf8 tools/deployment/run_build58_rollout.py rollback` restores pointer to57 using recorded run-id and preserves assets. It does not downgrade installed phones.
+
+Next candidate Build: 59. Older status sections below are historical.
+
 ## Build 57 publication ? 2026-10-06 16:55 Taiwan
 
 Android 1.0.11 Build 57 is public and active. Source `4a9fb3ce59e8e94226499881ba1f31c592b31263`, source tag `android-v1.0.11-b57`, shared version `1.0.11+57`; next candidate Build 58. Do not reuse 57.
