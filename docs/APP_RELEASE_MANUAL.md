@@ -1,5 +1,13 @@
 # APP 提交、發布與更新手冊
 
+## 最新狀態：2026-10-06 16:09（優先於下方 Build 54 歷史範例）
+
+Android **1.0.11 Build 55** 已公開並啟用正式更新通道。來源 `131a1e8fca576b0d0ea55696b4c1984a1997caca`，來源標籤 `android-v1.0.11-b55`，共享版號 `1.0.11+55`；下一候選為 Build 56，不可重用 55。
+
+本版最近資料前景每 2 秒自動刷新、資料年齡每秒更新，背景停止。依使用者要求未跑功能測試，手機由使用者更新後驗收。正式簽章、草稿／公開完整下載與正式 HTTPS 回讀核對通過；舊 Build 54 資產與服務保留。
+
+本輪工具在工作區 `tools/deployment/*build55*` 與 `verify_android55_public_channel.py`；pins 為 `docs/test_results/android_build55_rollout_pins.json`，run-id `20261006T080749Z`，完整進度與回滾參數在 `CONTINUE_2026-10-06_BUILD55_PUBLICATION.md`。下方 Build 54 命令為歷史範例，後續發布須按最新來源與 Build 更新。
+
 適用專案：GIOS 設備助手（2026-10-03 更名，原為 GIOS 現場開通）；建立日期：2026-10-01。程式碼位於 `APP_v2`，Android 發布資料位於 `android_releases`，兩者是不同的 Git repository。以下 Windows 指令以 PowerShell 5.1、工作區家裡機 `E:\iot_gateway`（公司機為 `F:\iot_gateway`，內容同步）為例。
 
 ## 1. 固定版本規則：1.0.11 不變，只增加 Build
