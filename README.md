@@ -10,32 +10,30 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 This repository is public following the owner's decision on 2026-09-30. Field
 staff can download published releases without a GitHub account.
-The current release is **GIOS 設備助手 — Android 1.0.11 (Build 53)**, published on 2026-10-06 (2026-10-06T04:51:20Z).
-The production in-app update channel is enabled for Build 53 (since about 2026-10-06 04:53 UTC).
+The current release is **GIOS 設備助手 — Android 1.0.11 (Build 54)**, published on 2026-10-06 (2026-10-06T07:22:16Z).
+The production in-app update channel is enabled for Build 54 (since about 2026-10-06 07:24 UTC).
 
-- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b53)
-- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b53/app_4de8302_b53_prod.apk)
-- Application source: `4de830202ad13414ca8cb380050a2e463a6ee87a`, fixed by the source repository's `android-v1.0.11-b53` tag.
-- APK `app_4de8302_b53_prod.apk` (61,161,555 bytes) SHA-256: `6517087ad1d2625480badd5cfef7a82c978204955cf8edfb96b3d574a8cc4a15`.
-- `android-update.json` SHA-256: `1440a9e8f173ce3066fa287122a7c9d3f2d54637d122935538c6c6656f7e8b1c`.
-- `SHA256SUMS` SHA-256: `aadb1a029564c9da55698ac21e57f781c4ad01fbd767e1afdc3b3865f92e9163`.
+- [Release details](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b54)
+- [Download the signed APK](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/download/android-v1.0.11-b54/app_549a3ff_b54_prod.apk)
+- Application source: `549a3ff0bf0fb5314c2b6583086ddd593fedd239`, fixed by the source repository's `android-v1.0.11-b54` tag.
+- APK `app_549a3ff_b54_prod.apk` (61,243,812 bytes) SHA-256: `56201d180ca8dec6bc0c31787d67dc4b066c77ff422d842e1ac0b0aa2bab585c`.
+- `android-update.json` SHA-256: `87bf4651b3b483e43138dcd4d1a082c6189ae1f75cc0322ce0c47fa389d4d404`.
+- `SHA256SUMS` SHA-256: `565c59fc4166b393b480f18e76123e563206cfb04c1e74141ddec47708421c8f`.
 - Signer certificate SHA-256: `2ae194573a906afd0a4e3ce347a275551e3e5b27a6d4a2644d36d07d102f4b64`.
 
-Build 53 changes the recent uploaded data page: current now shows the receiver
-output current (PRU IOUT) instead of the transmitter input current; transmitter
-and receiver temperatures are shown separately, with efficiency, device error
-code descriptions and the receiver MAC. The header title stays on one line, with
-the back-office help and environment controls on a second row. The new fields
-require backend v1.37.0 (deployed before this publication) and show `--` when a
-value is missing. Known issue: on small screens with large text some pages need
-scrolling, and English recent-data column headers may be truncated. The Build 52
-Traditional Chinese / English language switch is unchanged.
+Build 54 changes the launcher icon to the Voltraware logo (Android adaptive
+icon). There are no other application changes: the Build 53 recent uploaded
+data page (receiver output current, separate transmitter/receiver temperatures,
+efficiency, device error descriptions, receiver MAC; requires backend v1.37.0)
+and the Build 52 Traditional Chinese / English language switch are unchanged.
+Known issue (same as Build 53): on small screens with large text some pages need
+scrolling, and English recent-data column headers may be truncated.
 
 This production-signed APK was built from the tagged shared main source, whose
-pubspec is `1.0.11+53`. Version, package, signer and all three asset hashes passed
+pubspec is `1.0.11+54`. Version, package, signer and all three asset hashes passed
 independent review. Full draft and anonymous public GitHub downloads matched the
 approved files. Authenticated production HTTPS downloads from the VPS matched both
-new Build 53 and old Build 52 hashes, using the public address, trusted CA and
+new Build 54 and old Build 53 hashes, using the public address, trusted CA and
 hostname checks. The old assets and running services remained unchanged by this
 publication.
 
@@ -45,22 +43,10 @@ No iOS archive/upload was made, and this publication did not deploy the backend.
 Complete or cancel an active commissioning or temporary PTU replacement before
 installing an update.
 
-## Build 54 release candidate (not yet active)
-
-Android 1.0.11 (Build 54) is being prepared. It is **not active**; the production
-in-app update channel remains Build 53 until publication and verification are
-complete.
-
-- Application source: `549a3ff0bf0fb5314c2b6583086ddd593fedd239`, fixed by the source repository's `android-v1.0.11-b54` tag.
-- APK `app_549a3ff_b54_prod.apk` (61,243,812 bytes) SHA-256: `56201d180ca8dec6bc0c31787d67dc4b066c77ff422d842e1ac0b0aa2bab585c`.
-- `android-update.json` SHA-256: `87bf4651b3b483e43138dcd4d1a082c6189ae1f75cc0322ce0c47fa389d4d404`.
-- `SHA256SUMS` SHA-256: `565c59fc4166b393b480f18e76123e563206cfb04c1e74141ddec47708421c8f`.
-- Signer certificate SHA-256: `2ae194573a906afd0a4e3ce347a275551e3e5b27a6d4a2644d36d07d102f4b64`.
-
-Build 54 changes the launcher icon to the Voltraware logo (Android adaptive icon).
-There are no other application changes. Known issues are the same as Build 53.
-
-The previous release, [GIOS 設備助手 1.0.11 (Build 52)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b52)
+The previous release, [GIOS 設備助手 1.0.11 (Build 53)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b53)
+(source `4de830202ad13414ca8cb380050a2e463a6ee87a`, APK SHA-256
+`6517087ad1d2625480badd5cfef7a82c978204955cf8edfb96b3d574a8cc4a15`),
+[GIOS 設備助手 1.0.11 (Build 52)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b52)
 (source `0a94090d722d6dfe328706579fea0abf7b442ce0`, APK SHA-256
 `c723b8cdec3691742372b32500cc2500bcc1e536de8962fd0f4fb70256a751ac`), and
 [Android 1.0.11 (Build 51)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.11-b51)
@@ -71,7 +57,7 @@ original assets and fixed URLs.
 The historical [Android 1.0.0 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.0-b21)
 and [corrected Android 1.0.1 (Build 21) release](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.1-b21)
 and [Android 1.0.2 (Build 22)](https://github.com/jerrywu-voltraware/gateway-commissioning-releases/releases/tag/android-v1.0.2-b22)
-retain their original assets and fixed URLs. New installations should use Build 53.
+retain their original assets and fixed URLs. New installations should use Build 54.
 The original 1.0.0 updater on Android 9 cannot inspect the downloaded APK signing
 information correctly; a manual same-package, same-signature APK installation is
 needed for affected devices. Patched Build 20 and corrected 1.0.1 Build 21 can use
@@ -137,7 +123,7 @@ Use the appropriate release notes file for each new release. Review the generate
 manifest and verify the originating source and device acceptance evidence.
 
 For a new release, use the approved, unused Build number and a clean checkout.
-Do not rebuild or replace the published Build 53 or earlier assets:
+Do not rebuild or replace the published Build 54 or earlier assets:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_apk.ps1 -Env prod -BuildNumber <approved-build-number> -BuildName 1.0.11

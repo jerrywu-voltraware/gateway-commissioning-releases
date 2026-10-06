@@ -6,21 +6,19 @@
 
 **依使用者決定，APP 版本號固定為 `1.0.11`，後續一般修正與更新不再增加版本號，只增加 Build。** 不得自行改成 `1.0.12`、`1.1.0`，也不得讓自動發布工具按照每次修正自動增加版本號。只有使用者明確改變這項決定時，才另行規劃版本變更。
 
-目前已發布基準是 **`1.0.11 (Build 53)`**（2026-10-06 發布，原為 Build 52），正式更新通道已啟用。Android／iOS 統一在 `APP_v2` 的 `main` 主線開發；Build 53 的 APK 來源以 **APP 來源 repo** 的 `android-v1.0.11-b53` 標籤固定於 commit `4de830202ad13414ca8cb380050a2e463a6ee87a`。來源標籤與本發布 repo 的同名標籤用途不同；後續提交不改變原發布來源。主線 `pubspec.yaml` 目前為：
+目前已發布基準是 **`1.0.11 (Build 54)`**（2026-10-06 發布，原為 Build 53），正式更新通道已啟用。Android／iOS 統一在 `APP_v2` 的 `main` 主線開發；Build 54 的 APK 來源以 **APP 來源 repo** 的 `android-v1.0.11-b54` 標籤固定於 commit `549a3ff0bf0fb5314c2b6583086ddd593fedd239`。來源標籤與本發布 repo 的同名標籤用途不同；後續提交不改變原發布來源。主線 `pubspec.yaml` 目前為：
 
 ```yaml
 version: 1.0.11+54
 ```
 
-Build 53 由來源 4de8302 建置（共享 pubspec `1.0.11+53`），三資產 pins 見工作區 `docs/test_results/android_build53_rollout_pins.json`。不得因為主線後續提交而移動來源標籤或替換公開 APK。
+Build 54 由來源 549a3ff 建置（共享 pubspec `1.0.11+54`），三資產 pins 見工作區 `docs/test_results/android_build54_rollout_pins.json`。不得因為主線後續提交而移動來源標籤或替換公開 APK。
 
-Build 53 包含：「查看上傳資料」的電流改讀接收端輸出電流（PRU IOUT，不再以發射端輸入電流代替）、發射端／接收端溫度分開、效率、裝置錯誤碼說明（19 種）與接收端 MAC；頁首標題單行完整顯示，「請後台協助」與環境切換移到第二列。新欄位需後台 v1.37.0，未部署時顯示 `--`。已知問題：小螢幕大字體時部分頁面需捲動、英文最近資料表頭可能截斷。正式通道由 52→53，舊 52 資產與服務保持不變。Build 52 的中英語系切換保留。**Build 40 的來源遺漏已由 Build 41 修正。**
+Build 54 包含：APP 圖示改為 Voltraware 標誌（Android 自適應圖示，背景白色、前景內縮 16%）；其餘程式不變，Build 53 的「查看上傳資料」PRU 欄位（需後台 v1.37.0）與 Build 52 的中英語系切換保留。已知問題同 Build 53：小螢幕大字體時部分頁面需捲動、英文最近資料表頭可能截斷。正式通道由 53→54，舊 53 資產與服務保持不變。**Build 40 的來源遺漏已由 Build 41 修正。**
 
-Build 53 由使用者自行從 APP 內「檢查更新」安裝；發布輪沒有 ADB 安裝或手機內升級驗收。發布時只核對建置、正式簽章、版本、三資產完整下載雜湊及正式更新通道，不代表 Wi-Fi／BLE／PTU 實機驗收。iOS 未建置／上傳。
+Build 54 由使用者自行從 APP 內「檢查更新」安裝；發布輪沒有 ADB 安裝或手機內升級驗收。發布時只核對建置、正式簽章、版本、三資產完整下載雜湊及正式更新通道，不代表 Wi-Fi／BLE／PTU 實機驗收。iOS 未建置／上傳。
 
-**Build 54（候選，尚未啟用；正式更新通道仍為 Build 53）** 由 APP main `549a3ff0bf0fb5314c2b6583086ddd593fedd239`（共享 pubspec `1.0.11+54`，來源標籤 `android-v1.0.11-b54`）建置：APP 圖示改為 Voltraware 標誌（Android 自適應圖示），其餘程式不變；已知問題同 Build 53。三資產 pins 見工作區 `docs/test_results/android_build54_rollout_pins.json`。
-
-Build 54 已由上述候選占用（2026-10-06）；若兩平台都沒有占用更高的 Build，下一次只改為 `1.0.11+55`，再下一次為 `1.0.11+56`。發布前必須查詢 Android 已發布／已交付安裝的 Build，以及 App Store Connect 已上傳的 Build，確認本次數字尚未使用。**不可回退、重用已交付的 Build，或覆寫已公開的 Release 資產。** 既有早期 Build 21 修正例外不得當成日後重用 Build 的依據。
+若兩平台都沒有占用更高的 Build，下一次只改為 `1.0.11+55`，再下一次為 `1.0.11+56`。發布前必須查詢 Android 已發布／已交付安裝的 Build，以及 App Store Connect 已上傳的 Build，確認本次數字尚未使用。**不可回退、重用已交付的 Build，或覆寫已公開的 Release 資產。** 既有早期 Build 21 修正例外不得當成日後重用 Build 的依據。
 
 **同一核定來源、同一批次的 Android 與 iOS 可以共用相同 Build。** 例如 Android Build 39 已交付，仍可依同批核定來源製作 iOS Build 39；禁止的是同一平台重用該 Build 發布不同內容，不是禁止跨平台對齊。
 
@@ -47,14 +45,14 @@ Android 發布庫維持 **public**，現場人員下載已公開 APK 不需要 G
 
 ## 3. 修改 Build、測試、提交 APP
 
-以下指令從同一個 PowerShell 工作階段依序執行。**`54` 只是 Build 53 後的下一版範例，不是永久預設值**（2026-10-06 Build 53 發布後更新：原為 53）；先依第 1 節核定實際 Build 與來源工作樹，再設定變數。範例不會修改目前已發布的 Build 53。
+以下指令從同一個 PowerShell 工作階段依序執行。**`55` 只是 Build 54 後的下一版範例，不是永久預設值**（2026-10-06 Build 54 發布後更新：原為 54）；先依第 1 節核定實際 Build 與來源工作樹，再設定變數。範例不會修改目前已發布的 Build 54。
 
 ```powershell
 $workspace = 'E:\iot_gateway'   # company machine: F:\iot_gateway
 $appRoot = Join-Path $workspace 'APP_v2'
 $releaseRoot = Join-Path $workspace 'android_releases'
 $releaseVersion = '1.0.11'
-$releaseBuild = 54
+$releaseBuild = 55
 $releaseTag = "android-v$releaseVersion-b$releaseBuild"
 $releaseRepo = 'jerrywu-voltraware/gateway-commissioning-releases'
 Set-Location -LiteralPath $appRoot
@@ -97,7 +95,7 @@ if (-not $sourceBranch) { throw 'A release source branch is required' }
 
 ## 4. 建置正式 APK，獨立核對產物
 
-先確認 Java 路徑。Flutter 本身可能找到 Android Studio 的 Java，但獨立執行的 `apksigner` 仍需要正確 `JAVA_HOME`；缺少這一步會在簽章階段失敗。家裡機的 `C:\Program Files\Android\Android Studio\jbr` 缺 `lib\jvm.cfg`（Build 51 第一次簽章失敗原因），一定要用 `Android Studio1\jbr`；**公司機（USER01）相反**：`Android Studio\jbr` 完整、`Android Studio1\jbr` 缺 `lib\jvm.cfg`（Build 53 使用 `Android Studio\jbr`）。以含 `lib\jvm.cfg` 的那個為準；上面的檢查包含 `lib\jvm.cfg`。`$androidTools` 以 `$env:LOCALAPPDATA` 展開，家裡機（woo75）與公司機（USER01）都適用。
+先確認 Java 路徑。Flutter 本身可能找到 Android Studio 的 Java，但獨立執行的 `apksigner` 仍需要正確 `JAVA_HOME`；缺少這一步會在簽章階段失敗。家裡機的 `C:\Program Files\Android\Android Studio\jbr` 缺 `lib\jvm.cfg`（Build 51 第一次簽章失敗原因），一定要用 `Android Studio1\jbr`；**公司機（USER01）相反**：`Android Studio\jbr` 完整、`Android Studio1\jbr` 缺 `lib\jvm.cfg`（Build 53、54 使用 `Android Studio\jbr`）。以含 `lib\jvm.cfg` 的那個為準；上面的檢查包含 `lib\jvm.cfg`。`$androidTools` 以 `$env:LOCALAPPDATA` 展開，家裡機（woo75）與公司機（USER01）都適用。
 
 ```powershell
 $env:JAVA_HOME = 'C:\Program Files\Android\Android Studio1\jbr'
@@ -250,7 +248,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Local backend delivery verification failed' }
 
 2026-10-06 的 **Build 53 已發布並啟用正式通道**，本輪固定 52→53。使用工作區 `tools/deployment/android_build53_rollout.py`、`activate_build53_verified.py`、`verify_android53_public_channel.py`、`verify_build53_vps_https.py`、`download_build53_draft.py`（測試 `test_android_build53_rollout.py`，`py -3 -X utf8 -m unittest discover -s tools/deployment -p test_android_build53_rollout.py -v`）。來源 `4de830202ad13414ca8cb380050a2e463a6ee87a`。舊資產 pins 為 Build 52 三檔；新 pins 在工作區 `docs/test_results/android_build53_rollout_pins.json`；唯一 run-id `20261006T045041Z`（`docs/test_results/build53_rollout_runid.json`），GitHub Release ID 404325232。回復資料在 VPS `/home/jerrywu/android-app-releases/.rollout-1.0.11-b53-20261006T045041Z`。正式指標約 2026-10-06 04:53 UTC（台灣 12:53）由 52 切換為 53。草稿、公開匿名完整下載與正式 HTTPS 新53／舊52 APK 驗證均通過，正式服務保持本輪基準不變（後台 v1.37.0 已於基準前部署）；完整紀錄見工作區 `CONTINUE_2026-10-06_BUILD53_PUBLICATION.md` 與 `docs/test_results/build53_publication_2026-10-06.md`。使用者自行從 APP 更新，這輪沒有 ADB 安裝或手機內升級驗收。上述工具與公開資產皆固定於 Build 53，不可改寫冒充下一版。
 
-2026-10-06 準備的 **Build 54（候選，尚未啟用，正式更新通道仍為 Build 53）** 固定 53→54，使用工作區 `tools/deployment/android_build54_rollout.py`、`activate_build54_verified.py`、`verify_android54_public_channel.py`、`verify_build54_vps_https.py`、`download_build54_draft.py`（測試 `test_android_build54_rollout.py`，`py -3 -X utf8 -m unittest discover -s tools/deployment -p test_android_build54_rollout.py -v`）。來源 `549a3ff0bf0fb5314c2b6583086ddd593fedd239`。舊資產 pins 為 Build 53 三檔；新 pins 在工作區 `docs/test_results/android_build54_rollout_pins.json`，run-id 在 `docs/test_results/build54_rollout_runid.json`。helper 內的 `FILL_AFTER_BUILD`／`FILL_AT_STAGE` 未填時一律以 `pins_not_filled` 拒絕執行。這些工具與資產固定於 Build 54，不可套用下一版。
+2026-10-06 的 **Build 54 已發布並啟用正式通道**，本輪固定 53→54。使用工作區 `tools/deployment/android_build54_rollout.py`、`activate_build54_verified.py`、`verify_android54_public_channel.py`、`verify_build54_vps_https.py`、`download_build54_draft.py`（測試 `test_android_build54_rollout.py`，`py -3 -X utf8 -m unittest discover -s tools/deployment -p test_android_build54_rollout.py -v`）。來源 `549a3ff0bf0fb5314c2b6583086ddd593fedd239`。舊資產 pins 為 Build 53 三檔；新 pins 在工作區 `docs/test_results/android_build54_rollout_pins.json`；唯一 run-id `20261006T072143Z`（`docs/test_results/build54_rollout_runid.json`），GitHub Release ID 404426425。回復資料在 VPS `/home/jerrywu/android-app-releases/.rollout-1.0.11-b54-20261006T072143Z`。正式指標約 2026-10-06 07:24 UTC（台灣 15:24）由 53 切換為 54。草稿、公開匿名完整下載與正式 HTTPS 新54／舊53 APK 驗證均通過，正式服務保持本輪基準不變（後台 HEAD 4598fbc）；完整紀錄見工作區 `CONTINUE_2026-10-06_BUILD54_PUBLICATION.md` 與 `docs/test_results/build54_publication_2026-10-06.md`。使用者自行從 APP 更新，這輪沒有 ADB 安裝或手機內升級驗收。上述工具與公開資產皆固定於 Build 54，不可改寫冒充下一版。
 
 以下保留 Build 42 的歷史工具說明：`tools/deployment/android_build42_rollout.py` **固定只做 `1.0.11 Build 41 → 42`**，來源 `b997b7b8e0dcba3169f9f78c732ed42746cc3ad1`。它不是通用下一版發布器；後續版本不可照抄舊 helper 的 run-id、tag、source 或 hash，也不可修改舊 helper 來冒充新的核定流程。
 
