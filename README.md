@@ -8,17 +8,19 @@ the fixed-version policy: keep **1.0.11** and increase **Build** for each update
 
 ## Current status
 
-## Android Build64 active - 2026-10-06 21:39 Taiwan
+## Android Build65 active - 2026-10-07 10:08 Taiwan
 
-- Version 1.0.11 Build64; source `bcd06eec4489b1af8fb05b226e5706781f0063a2`, tag `android-v1.0.11-b64`.
-- Home heading now says Choose an action; duplicate subtitle removed. Includes Build63 fix: update dialog checks its own route visibility and keeps existing foreground/session/BLE guards, so it no longer disables its own update button.
-- APK `app_bcd06ee_b64_prod.apk`, 61243812 bytes, SHA256 `d24cfe05a8eb253c37982347ab19af2966e3998bd2bf85e9101993204ff797a2`. Release build, official signature and version checks passed; home/update labels verified in all three APK architectures; Chinese manifest and production update notes verified.
-- Draft/public complete downloads and production HTTPS readback passed. GitHub Release 404752600 stable/latest; run-id `20261006T133351Z`. Old Build62 assets preserved; all nine running containers unchanged during APP publication from the pre-publication baseline; no backend deployment/restart.
-- Scoped Dart analysis checks passed. Functional tests not run per user request; physical phone update validation remains with user. No iOS publication.
-- Evidence: `build64_unicode_verification.json`, `build64_draft_verification_2026-10-06.json`, `android_build64_public_channel_github_2026-10-06.json`, `android_build64_public_channel_post_2026-10-06.json`, `android_build64_rollout_pins.json`.
-- Authorized APP rollback only: `py -3 -X utf8 tools/deployment/run_build64_rollout.py rollback` restores the pointer to62 and preserves assets; installed phones are not downgraded.
+- Version1.0.11 Build65; source006ed1d048dab637c0c1c9c76ce44ebdff05ee12; source tag android-v1.0.11-b65. Public release405302333; run20261007T020614Z.
+- Fixes Change Wi-Fi silently returning when station entry is empty/invalid. Opens existing Wi-Fi-first or Wi-Fi-only form before identity selection. Existing commissioned devices retain original site/gateway fields and clear swap selection; successful Wi-Fi configuration returns to station selection through existing flow.
+- Initial source3793e97 artifact superseded before publication by reviewed006ed1d; never delivered or published. Independent source review found and resolved existing-station save conflict before final build.
+- Signed APK app_006ed1d_b65_prod.apk,61243812 bytes,SHA2567731dcef8db842c1539d7330f7356a76945fe795f962791cb41d4eb13c7da4c8. Formal signer v2/v3,zipalign,package/version,three-ABI production endpoint and Chinese label checks passed. Final build91.3s; scoped Dart analysis no issues.
+- Draft/public complete downloads and production HTTPS readback passed. Production metadata confirms65; notes Unicode verified. Old64 assets and all nine running services unchanged. No backend/firmware deployment.
+- No functional tests or physical phone acceptance per user request. User installs through APP update; verify empty-site Change Wi-Fi opens form, save returns to site selection, and existing-device identity remains unchanged.
+- Existing dirty field-guide documents/assets in APP_v2 preserved. Built from clean detached APP_build65, using existing ignored build inputs. APP main/source tag pushed.
+- Evidence: docs/test_results/android_build65_rollout_pins.json,build65_unicode_verification.json,build65_draft_verification_2026-10-07.json,android_build65_public_channel_github_2026-10-07.json,android_build65_public_channel_post_2026-10-07.json.
+- Authorized rollback only: py -3 -X utf8 tools/deployment/run_build65_rollout.py rollback restores pointer64,preserves assets; installed phones are not downgraded.
 
-Next candidate Build: 65.
+Next candidate Build:66.
 
 ## Previous Build 55 publication (historical)
 

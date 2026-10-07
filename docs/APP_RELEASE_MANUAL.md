@@ -1,5 +1,21 @@
 # APP 提交、發布與更新手冊
 
+## Android Build65 active - 2026-10-07 10:08 Taiwan
+
+- Version1.0.11 Build65; source006ed1d048dab637c0c1c9c76ce44ebdff05ee12; source tag android-v1.0.11-b65. Public release405302333; run20261007T020614Z.
+- Fixes Change Wi-Fi silently returning when station entry is empty/invalid. Opens existing Wi-Fi-first or Wi-Fi-only form before identity selection. Existing commissioned devices retain original site/gateway fields and clear swap selection; successful Wi-Fi configuration returns to station selection through existing flow.
+- Initial source3793e97 artifact superseded before publication by reviewed006ed1d; never delivered or published. Independent source review found and resolved existing-station save conflict before final build.
+- Signed APK app_006ed1d_b65_prod.apk,61243812 bytes,SHA2567731dcef8db842c1539d7330f7356a76945fe795f962791cb41d4eb13c7da4c8. Formal signer v2/v3,zipalign,package/version,three-ABI production endpoint and Chinese label checks passed. Final build91.3s; scoped Dart analysis no issues.
+- Draft/public complete downloads and production HTTPS readback passed. Production metadata confirms65; notes Unicode verified. Old64 assets and all nine running services unchanged. No backend/firmware deployment.
+- No functional tests or physical phone acceptance per user request. User installs through APP update; verify empty-site Change Wi-Fi opens form, save returns to site selection, and existing-device identity remains unchanged.
+- Existing dirty field-guide documents/assets in APP_v2 preserved. Built from clean detached APP_build65, using existing ignored build inputs. APP main/source tag pushed.
+- Evidence: docs/test_results/android_build65_rollout_pins.json,build65_unicode_verification.json,build65_draft_verification_2026-10-07.json,android_build65_public_channel_github_2026-10-07.json,android_build65_public_channel_post_2026-10-07.json.
+- Authorized rollback only: py -3 -X utf8 tools/deployment/run_build65_rollout.py rollback restores pointer64,preserves assets; installed phones are not downgraded.
+
+Next candidate Build:66.
+
+Older entries below are historical.
+
 ## Android Build64 active - 2026-10-06 21:39 Taiwan
 
 - Version 1.0.11 Build64; source `bcd06eec4489b1af8fb05b226e5706781f0063a2`, tag `android-v1.0.11-b64`.
